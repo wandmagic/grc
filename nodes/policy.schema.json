@@ -1,0 +1,76 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Policy Node",
+  "description": "A node representing a policy in a GRC model",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../node.schema.json#/definitions/node"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "policy"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the policy"
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed description of the policy"
+        },
+        "category": {
+          "type": "string",
+          "description": "Category of the policy",
+          "enum": ["security", "privacy", "operational", "hr", "financial", "it", "compliance", "other"]
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the policy"
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the policy",
+          "enum": ["draft", "review", "approved", "published", "retired", "superseded"]
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the policy becomes effective"
+        },
+        "reviewDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the policy should be reviewed"
+        },
+        "expirationDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the policy expires"
+        },
+        "approvalAuthority": {
+          "type": "string",
+          "description": "Authority that approved the policy"
+        },
+        "scope": {
+          "type": "string",
+          "description": "Scope of the policy (e.g., organization-wide, department-specific)"
+        },
+        "documentLocation": {
+          "type": "string",
+          "description": "Location or URI of the policy document"
+        },
+        "complianceFrameworks": {
+          "type": "array",
+          "description": "Compliance frameworks the policy addresses",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["name", "description", "status"]
+    }
+  ],
+  "$id": "policy.schema.json"
+}

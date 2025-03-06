@@ -1,0 +1,139 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "GRC Bundle Schema",
+  "description": "A schema for representing a bundle of nodes and links in a Governance, Risk, and Compliance (GRC) model",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "node.schema.json#/definitions/node"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "bundle"
+        },
+        "nodes": {
+          "type": "array",
+          "description": "Collection of nodes in the bundle",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "nodes/compliance-requirement.schema.json"
+              },
+              {
+                "$ref": "nodes/control.schema.json"
+              },
+              {
+                "$ref": "nodes/person.schema.json"
+              },
+              {
+                "$ref": "nodes/plan-of-action-item.schema.json"
+              },
+              {
+                "$ref": "nodes/policy.schema.json"
+              },
+              {
+                "$ref": "nodes/responsibility.schema.json"
+              },
+              {
+                "$ref": "nodes/risk.schema.json"
+              },
+              {
+                "$ref": "nodes/role.schema.json"
+              },
+              {
+                "$ref": "nodes/sbom-attestation.schema.json"
+              },
+              {
+                "$ref": "nodes/system-component.schema.json"
+              },
+              {
+                "$ref": "nodes/threat.schema.json"
+              },
+              {
+                "$ref": "nodes/vulnerability.schema.json"
+              }
+            ]
+          }
+        },
+        "links": {
+          "type": "array",
+          "description": "Collection of links between nodes",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "links/assignment.schema.json"
+              },
+              {
+                "$ref": "links/compliance.schema.json"
+              },
+              {
+                "$ref": "links/implementation.schema.json"
+              },
+              {
+                "$ref": "links/mitigation.schema.json"
+              },
+              {
+                "$ref": "links/ownership.schema.json"
+              },
+              {
+                "$ref": "links/responsibility.schema.json"
+              },
+              {
+                "$ref": "links/threat.schema.json"
+              }
+            ]
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Metadata about the bundle",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Name of the bundle"
+            },
+            "description": {
+              "type": "string",
+              "description": "Description of the bundle"
+            },
+            "version": {
+              "type": "string",
+              "description": "Version of the bundle"
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Date and time when the bundle was created"
+            },
+            "updatedAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Date and time when the bundle was last updated"
+            },
+            "createdBy": {
+              "type": "string",
+              "description": "Person or entity that created the bundle"
+            },
+            "organization": {
+              "type": "string",
+              "description": "Organization that owns the bundle"
+            },
+            "tags": {
+              "type": "array",
+              "description": "Tags associated with the bundle",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "nodes",
+        "links"
+      ]
+    }
+  ],
+  "$id": "bundle.schema.json"
+}

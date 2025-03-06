@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Node Schema",
+  "description": "A schema for representing nodes in a graph",
+  "type": "object",
+  "definitions": {
+    "node": {
+      "type": "object",
+      "required": ["id", "type"],
+      "properties": {
+      "id": {
+            "type": "string",
+            "description": "Unique identifier for the node",
+            "pattern": "^{{type}}-.+"
+          },
+        "type": {
+          "type": "string",
+          "description": "Type of the node"
+        }
+      }
+    }
+  },
+  "$id": "node.schema.json"
+}

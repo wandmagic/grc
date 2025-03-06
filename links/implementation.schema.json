@@ -1,0 +1,88 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Implementation Link",
+  "description": "A link representing an implementation relationship between nodes",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../link.schema.json#/definitions/link"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "implementation"
+        },
+        "relationship": {
+          "const": "implements"
+        },
+        "from": {
+          "type": "array",
+          "description": "IDs of the source nodes (format: 'type-id')",
+          "items": {
+            "type": "string",
+            "pattern": "^(system-component|policy)-.+"
+          },
+          "minItems": 1
+        },
+        "to": {
+          "type": "array",
+          "description": "IDs of the target nodes (format: 'type-id')",
+          "items": {
+            "type": "string",
+            "pattern": "^(control|policy)-.+"
+          },
+          "minItems": 1
+        },
+        "implementationType": {
+          "type": "string",
+          "description": "Type of implementation relationship",
+          "enum": ["full", "partial", "planned", "inherited", "compensating"]
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the implementation",
+          "enum": ["planned", "in-progress", "implemented", "verified", "deprecated"]
+        },
+        "implementationDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the implementation was completed"
+        },
+        "plannedCompletionDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Planned date for implementation completion"
+        },
+        "lastReviewDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the implementation was last reviewed"
+        },
+        "nextReviewDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the implementation should be reviewed next"
+        },
+        "implementedBy": {
+          "type": "string",
+          "description": "Person or entity that performed the implementation"
+        },
+        "verifiedBy": {
+          "type": "string",
+          "description": "Person or entity that verified the implementation"
+        },
+        "effectiveness": {
+          "type": "string",
+          "description": "Effectiveness of the implementation",
+          "enum": ["ineffective", "partially-effective", "effective", "highly-effective", "not-assessed"]
+        },
+        "documentReference": {
+          "type": "string",
+          "description": "Reference to implementation documentation"
+        }
+      },
+      "required": ["implementationType", "status"]
+    }
+  ],
+  "$id": "implementation.schema.json"
+}

@@ -1,0 +1,84 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Threat Node",
+  "description": "A node representing a threat in a GRC model",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../node.schema.json#/definitions/node"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "threat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the threat"
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed description of the threat"
+        },
+        "category": {
+          "type": "string",
+          "description": "Category of the threat",
+          "enum": ["cyber", "physical", "natural", "human", "supply-chain", "insider", "other"]
+        },
+        "source": {
+          "type": "string",
+          "description": "Source of the threat",
+          "enum": ["internal", "external", "partner", "unknown"]
+        },
+        "threatActor": {
+          "type": "string",
+          "description": "Type of threat actor",
+          "enum": ["nation-state", "criminal", "hacktivist", "insider", "competitor", "natural", "unknown"]
+        },
+        "motivation": {
+          "type": "string",
+          "description": "Motivation behind the threat",
+          "enum": ["financial", "political", "espionage", "sabotage", "revenge", "accidental", "unknown"]
+        },
+        "capability": {
+          "type": "string",
+          "description": "Capability level of the threat actor",
+          "enum": ["low", "medium", "high", "advanced", "unknown"]
+        },
+        "likelihood": {
+          "type": "string",
+          "description": "Likelihood of the threat materializing",
+          "enum": ["rare", "unlikely", "possible", "likely", "almost-certain"]
+        },
+        "potentialImpact": {
+          "type": "string",
+          "description": "Potential impact if the threat materializes",
+          "enum": ["insignificant", "minor", "moderate", "major", "severe"]
+        },
+        "tactics": {
+          "type": "array",
+          "description": "Tactics used by the threat (e.g., MITRE ATT&CK tactics)",
+          "items": {
+            "type": "string"
+          }
+        },
+        "techniques": {
+          "type": "array",
+          "description": "Techniques used by the threat (e.g., MITRE ATT&CK techniques)",
+          "items": {
+            "type": "string"
+          }
+        },
+        "indicators": {
+          "type": "array",
+          "description": "Indicators of the threat",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["name", "description", "category"]
+    }
+  ],
+  "$id": "threat.schema.json"
+}

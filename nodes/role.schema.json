@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Role Node",
+  "description": "A node representing a role in a GRC model",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../node.schema.json#/definitions/node"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "role"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the role"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the role and its purpose"
+        },
+        "category": {
+          "type": "string",
+          "description": "Category of the role (e.g., technical, managerial, executive)",
+          "enum": ["technical", "managerial", "executive", "administrative", "security", "compliance", "other"]
+        },
+        "accessLevel": {
+          "type": "string",
+          "description": "Access level associated with the role",
+          "enum": ["low", "medium", "high", "admin"]
+        },
+        "department": {
+          "type": "string",
+          "description": "Department the role belongs to"
+        },
+        "approvalAuthority": {
+          "type": "boolean",
+          "description": "Whether the role has approval authority"
+        },
+        "requiredCertifications": {
+          "type": "array",
+          "description": "List of certifications required for the role",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requiredTraining": {
+          "type": "array",
+          "description": "List of training required for the role",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["name"]
+    }
+  ],
+  "$id": "role.schema.json"
+}

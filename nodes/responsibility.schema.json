@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Responsibility Node",
+  "description": "A node representing a responsibility in a GRC model",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../node.schema.json#/definitions/node"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "responsibility"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the responsibility"
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed description of the responsibility"
+        },
+        "category": {
+          "type": "string",
+          "description": "Category of the responsibility",
+          "enum": ["operational", "managerial", "strategic", "security", "compliance", "technical", "other"]
+        },
+        "priority": {
+          "type": "string",
+          "description": "Priority level of the responsibility",
+          "enum": ["low", "medium", "high", "critical"]
+        },
+        "frequency": {
+          "type": "string",
+          "description": "How often the responsibility needs to be fulfilled",
+          "enum": ["daily", "weekly", "monthly", "quarterly", "annually", "as-needed", "continuous"]
+        },
+        "requiredSkills": {
+          "type": "array",
+          "description": "Skills required to fulfill this responsibility",
+          "items": {
+            "type": "string"
+          }
+        },
+        "estimatedEffort": {
+          "type": "string",
+          "description": "Estimated effort required to fulfill this responsibility"
+        },
+        "complianceRelevant": {
+          "type": "boolean",
+          "description": "Whether this responsibility is relevant for compliance purposes"
+        }
+      },
+      "required": ["name", "description"]
+    }
+  ],
+  "$id": "responsibility.schema.json"
+}

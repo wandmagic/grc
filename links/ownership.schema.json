@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Ownership Link",
+  "description": "A link representing an ownership relationship between nodes",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../link.schema.json#/definitions/link"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "ownership"
+        },
+        "relationship": {
+          "const": "owns"
+        },
+        "from": {
+          "type": "array",
+          "description": "IDs of the source nodes (format: 'type-id')",
+          "items": {
+            "type": "string",
+            "pattern": "^(person|role)-.+"
+          },
+          "minItems": 1
+        },
+        "to": {
+          "type": "array",
+          "description": "IDs of the target nodes (format: 'type-id')",
+          "items": {
+            "type": "string",
+            "pattern": "^(system-component|policy|control)-.+"
+          },
+          "minItems": 1
+        },
+        "ownershipType": {
+          "type": "string",
+          "description": "Type of ownership relationship",
+          "enum": ["primary", "secondary", "delegated", "temporary", "custodial"]
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the ownership began"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the ownership ends or ended"
+        },
+        "approvedBy": {
+          "type": "string",
+          "description": "Person or entity that approved the ownership"
+        },
+        "documentReference": {
+          "type": "string",
+          "description": "Reference to a document that establishes the ownership"
+        }
+      },
+      "required": ["ownershipType"]
+    }
+  ],
+  "$id": "ownership.schema.json"
+}

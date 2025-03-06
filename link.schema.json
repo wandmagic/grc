@@ -1,0 +1,55 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Link Schema",
+  "description": "A schema for representing links in a graph, inheriting from node schema",
+  "type": "object",
+  "definitions": {
+    "link": {
+      "allOf": [
+        {
+          "$ref": "node.schema.json#/definitions/node"
+        },
+        {
+          "type": "object",
+          "required": ["from", "to", "relationship"],
+          "properties": {
+            "from": {
+              "type": "array",
+              "description": "IDs of the source nodes (format: 'type-id')",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1
+            },
+            "to": {
+              "type": "array",
+              "description": "IDs of the target nodes (format: 'type-id')",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1
+            },
+            "relationship": {
+              "type": "string",
+              "description": "Type of relationship between the nodes"
+            }
+          }
+        }
+      ]
+    },
+    "nodeTypePattern": {
+      "description": "Helper function to create a pattern that matches specific node types",
+      "type": "object",
+      "properties": {
+        "allowedTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Array of allowed node types"
+        }
+      }
+    }
+  },
+  "$id": "link.schema.json"
+}

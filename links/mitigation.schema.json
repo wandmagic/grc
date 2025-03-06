@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Mitigation Link",
+  "description": "A link representing a mitigation relationship between nodes",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../link.schema.json#/definitions/link"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "mitigation"
+        },
+        "relationship": {
+          "const": "mitigates"
+        },
+        "from": {
+          "type": "array",
+          "description": "IDs of the source nodes (format: 'type-id')",
+          "items": {
+            "type": "string",
+            "pattern": "^(control|plan-of-action-item)-.+"
+          },
+          "minItems": 1
+        },
+        "to": {
+          "type": "array",
+          "description": "IDs of the target nodes (format: 'type-id')",
+          "items": {
+            "type": "string",
+            "pattern": "^(risk|vulnerability|threat)-.+"
+          },
+          "minItems": 1
+        },
+        "mitigationType": {
+          "type": "string",
+          "description": "Type of mitigation relationship",
+          "enum": ["preventive", "detective", "corrective", "compensating", "deterrent", "recovery"]
+        },
+        "effectiveness": {
+          "type": "string",
+          "description": "Effectiveness of the mitigation",
+          "enum": ["ineffective", "partially-effective", "effective", "highly-effective", "not-assessed"]
+        },
+        "implementationDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the mitigation was implemented"
+        },
+        "lastReviewDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the mitigation was last reviewed"
+        },
+        "nextReviewDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the mitigation should be reviewed next"
+        },
+        "residualRiskLevel": {
+          "type": "string",
+          "description": "Residual risk level after mitigation",
+          "enum": ["negligible", "low", "medium", "high", "critical"]
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the mitigation",
+          "enum": ["planned", "implemented", "verified", "ineffective", "retired"]
+        },
+        "verifiedBy": {
+          "type": "string",
+          "description": "Person or entity that verified the mitigation"
+        }
+      },
+      "required": ["mitigationType", "effectiveness", "status"]
+    }
+  ],
+  "$id": "mitigation.schema.json"
+}

@@ -1,0 +1,81 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Compliance Requirement Node",
+  "description": "A node representing a compliance requirement in a GRC model",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../node.schema.json#/definitions/node"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "compliance-requirement"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the compliance requirement"
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed description of the compliance requirement"
+        },
+        "requirementId": {
+          "type": "string",
+          "description": "Identifier for the requirement (e.g., from a standard or regulation)"
+        },
+        "framework": {
+          "type": "string",
+          "description": "Compliance framework the requirement belongs to (e.g., NIST CSF, ISO 27001, GDPR)"
+        },
+        "category": {
+          "type": "string",
+          "description": "Category of the requirement within the framework"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the framework or standard"
+        },
+        "applicability": {
+          "type": "string",
+          "description": "Applicability of the requirement to the organization",
+          "enum": ["applicable", "not-applicable", "partially-applicable", "under-review"]
+        },
+        "complianceStatus": {
+          "type": "string",
+          "description": "Current compliance status for the requirement",
+          "enum": ["compliant", "non-compliant", "partially-compliant", "not-assessed", "exempted"]
+        },
+        "priority": {
+          "type": "string",
+          "description": "Priority level for addressing the requirement",
+          "enum": ["low", "medium", "high", "critical"]
+        },
+        "assessmentFrequency": {
+          "type": "string",
+          "description": "How often the requirement is assessed",
+          "enum": ["continuous", "monthly", "quarterly", "semi-annually", "annually", "as-needed"]
+        },
+        "lastAssessmentDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the requirement was last assessed"
+        },
+        "nextAssessmentDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the requirement should be assessed next"
+        },
+        "evidenceRequired": {
+          "type": "array",
+          "description": "Types of evidence required to demonstrate compliance",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["name", "description", "framework", "complianceStatus"]
+    }
+  ],
+  "$id": "compliance-requirement.schema.json"
+}

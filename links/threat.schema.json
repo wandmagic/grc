@@ -1,0 +1,85 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Threat Link",
+  "description": "A link representing a threat relationship between nodes",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../link.schema.json#/definitions/link"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "threat-relationship"
+        },
+        "relationship": {
+          "const": "threatens"
+        },
+        "from": {
+          "type": "array",
+          "description": "IDs of the source nodes (format: 'type-id')",
+          "items": {
+            "type": "string",
+            "pattern": "^(threat)-.+"
+          },
+          "minItems": 1
+        },
+        "to": {
+          "type": "array",
+          "description": "IDs of the target nodes (format: 'type-id')",
+          "items": {
+            "type": "string",
+            "pattern": "^(system-component|vulnerability)-.+"
+          },
+          "minItems": 1
+        },
+        "threatType": {
+          "type": "string",
+          "description": "Type of threat relationship",
+          "enum": ["exploits", "targets", "compromises", "disrupts", "damages", "accesses", "modifies", "destroys"]
+        },
+        "likelihood": {
+          "type": "string",
+          "description": "Likelihood of the threat materializing",
+          "enum": ["rare", "unlikely", "possible", "likely", "almost-certain"]
+        },
+        "impact": {
+          "type": "string",
+          "description": "Impact if the threat materializes",
+          "enum": ["insignificant", "minor", "moderate", "major", "severe"]
+        },
+        "attackVector": {
+          "type": "string",
+          "description": "Vector or path of the attack",
+          "enum": ["network", "physical", "adjacent", "local", "social", "supply-chain"]
+        },
+        "attackComplexity": {
+          "type": "string",
+          "description": "Complexity of executing the attack",
+          "enum": ["low", "medium", "high"]
+        },
+        "privilegesRequired": {
+          "type": "string",
+          "description": "Level of privileges required to execute the attack",
+          "enum": ["none", "low", "high"]
+        },
+        "userInteraction": {
+          "type": "boolean",
+          "description": "Whether user interaction is required for the attack"
+        },
+        "exploitability": {
+          "type": "string",
+          "description": "Exploitability assessment",
+          "enum": ["unproven", "proof-of-concept", "functional", "high", "not-defined"]
+        },
+        "lastAssessmentDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the threat was last assessed"
+        }
+      },
+      "required": ["threatType", "likelihood", "impact"]
+    }
+  ],
+  "$id": "threat-relationship.schema.json"
+}

@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Assignment Link",
+  "description": "A link representing an assignment relationship between nodes",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../link.schema.json#/definitions/link"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "assignment"
+        },
+        "relationship": {
+          "const": "assignedTo"
+        },
+        "from": {
+          "type": "array",
+          "description": "IDs of the source nodes (format: 'type-id')",
+          "items": {
+            "type": "string",
+            "pattern": "^(person|role|responsibility)-.+"
+          },
+          "minItems": 1
+        },
+        "to": {
+          "type": "array",
+          "description": "IDs of the target nodes (format: 'type-id')",
+          "items": {
+            "type": "string",
+            "pattern": "^(role|responsibility|plan-of-action-item)-.+"
+          },
+          "minItems": 1
+        },
+        "assignmentType": {
+          "type": "string",
+          "description": "Type of assignment relationship",
+          "enum": ["primary", "secondary", "temporary", "backup", "rotational"]
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the assignment began"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the assignment ends or ended"
+        },
+        "assignedBy": {
+          "type": "string",
+          "description": "Person or entity that made the assignment"
+        },
+        "assignmentPercentage": {
+          "type": "number",
+          "description": "Percentage of time or effort allocated to this assignment",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the assignment",
+          "enum": ["active", "inactive", "pending", "completed"]
+        }
+      },
+      "required": ["assignmentType", "status"]
+    }
+  ],
+  "$id": "assignment.schema.json"
+}

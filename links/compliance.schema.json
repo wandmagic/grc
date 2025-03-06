@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Compliance Link",
+  "description": "A link representing a compliance relationship between nodes",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../link.schema.json#/definitions/link"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "compliance"
+        },
+        "relationship": {
+          "const": "satisfies"
+        },
+        "from": {
+          "type": "array",
+          "description": "IDs of the source nodes (format: 'type-id')",
+          "items": {
+            "type": "string",
+            "pattern": "^(control|policy|system-component)-.+"
+          },
+          "minItems": 1
+        },
+        "to": {
+          "type": "array",
+          "description": "IDs of the target nodes (format: 'type-id')",
+          "items": {
+            "type": "string",
+            "pattern": "^(compliance-requirement)-.+"
+          },
+          "minItems": 1
+        },
+        "complianceType": {
+          "type": "string",
+          "description": "Type of compliance relationship",
+          "enum": ["fully-satisfies", "partially-satisfies", "contributes-to", "implements", "demonstrates"]
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the compliance relationship",
+          "enum": ["planned", "implemented", "verified", "audited", "non-compliant"]
+        },
+        "verificationMethod": {
+          "type": "string",
+          "description": "Method used to verify compliance",
+          "enum": ["documentation-review", "interview", "observation", "testing", "automated-check", "third-party-assessment"]
+        },
+        "verificationDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when compliance was verified"
+        },
+        "nextVerificationDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when compliance should be verified next"
+        },
+        "verifiedBy": {
+          "type": "string",
+          "description": "Person or entity that verified compliance"
+        },
+        "evidenceLocation": {
+          "type": "string",
+          "description": "Location or reference to compliance evidence"
+        },
+        "notes": {
+          "type": "string",
+          "description": "Additional notes about the compliance relationship"
+        }
+      },
+      "required": ["complianceType", "status"]
+    }
+  ],
+  "$id": "compliance.schema.json"
+}

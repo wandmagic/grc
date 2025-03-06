@@ -1,0 +1,90 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Plan of Action Item Node",
+  "description": "A node representing a plan of action item in a GRC model",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../node.schema.json#/definitions/node"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "plan-of-action-item"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the plan of action item"
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed description of the plan of action item"
+        },
+        "status": {
+          "type": "string",
+          "description": "Current status of the plan of action item",
+          "enum": ["planned", "in-progress", "completed", "delayed", "cancelled"]
+        },
+        "priority": {
+          "type": "string",
+          "description": "Priority level of the plan of action item",
+          "enum": ["low", "medium", "high", "critical"]
+        },
+        "dueDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Due date for the plan of action item"
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Start date for the plan of action item"
+        },
+        "completionDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Actual completion date of the plan of action item"
+        },
+        "estimatedEffort": {
+          "type": "string",
+          "description": "Estimated effort required to complete the plan of action item"
+        },
+        "milestones": {
+          "type": "array",
+          "description": "List of milestones for the plan of action item",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Name of the milestone"
+              },
+              "dueDate": {
+                "type": "string",
+                "format": "date",
+                "description": "Due date for the milestone"
+              },
+              "status": {
+                "type": "string",
+                "description": "Status of the milestone",
+                "enum": ["planned", "in-progress", "completed", "delayed", "cancelled"]
+              }
+            },
+            "required": ["name"]
+          }
+        },
+        "costEstimate": {
+          "type": "number",
+          "description": "Estimated cost to complete the plan of action item"
+        },
+        "remediationType": {
+          "type": "string",
+          "description": "Type of remediation",
+          "enum": ["technical", "procedural", "administrative", "physical", "other"]
+        }
+      },
+      "required": ["name", "description", "status"]
+    }
+  ],
+  "$id": "plan-of-action-item.schema.json"
+}

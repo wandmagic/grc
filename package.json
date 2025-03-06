@@ -1,0 +1,33 @@
+{
+  "name": "grc-schema",
+  "version": "1.0.0",
+  "description": "JSON Schema for Governance, Risk, and Compliance (GRC) models",
+  "main": "dist/grc-schema.json",
+  "scripts": {
+    "compile": "node scripts/compile-schemas.js",
+    "validate": "node scripts/validate-examples.js",
+    "test": "npm run compile && npm run validate"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/user/grc-schema.git"
+  },
+  "keywords": [
+    "grc",
+    "governance",
+    "risk",
+    "compliance",
+    "schema",
+    "json-schema"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/user/grc-schema/issues"
+  },
+  "homepage": "https://github.com/user/grc-schema#readme",
+  "devDependencies": {
+    "ajv": "^8.12.0",
+    "ajv-formats": "^2.1.1"
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "$schema": "../dist/grc-schema.json",
+  "id": "bundle-simple",
+  "type": "bundle",
+  "nodes": [
+    {
+      "id": "system-component-1",
+      "type": "system-component",
+      "name": "Web Server",
+      "description": "Main production web server",
+      "category": "software",
+      "version": "1.0.0",
+      "status": "active",
+      "criticality": "high"
+    },
+    {
+      "id": "system-component-2",
+      "type": "system-component",
+      "name": "Database Server",
+      "description": "Main production database server",
+      "category": "software",
+      "version": "2.1.0",
+      "status": "active",
+      "criticality": "critical"
+    },
+    {
+      "id": "person-1",
+      "type": "person",
+      "firstName": "John",
+      "lastName": "Doe",
+      "email": "john.doe@example.com",
+      "department": "IT",
+      "title": "System Administrator"
+    },
+    {
+      "id": "role-1",
+      "type": "role",
+      "name": "System Administrator",
+      "description": "Responsible for managing and maintaining IT systems",
+      "category": "technical",
+      "accessLevel": "admin"
+    },
+    {
+      "id": "vulnerability-1",
+      "type": "vulnerability",
+      "name": "SQL Injection",
+      "description": "SQL injection vulnerability in the database connection layer",
+      "category": "software",
+      "severity": "high",
+      "status": "identified"
+    },
+    {
+      "id": "control-1",
+      "type": "control",
+      "name": "Input Validation",
+      "description": "Validate all user input to prevent SQL injection attacks",
+      "controlId": "SEC-001",
+      "category": "preventive",
+      "implementation": "technical",
+      "status": "implemented"
+    }
+  ],
+  "links": [
+    {
+      "id": "ownership-1",
+      "type": "ownership",
+      "from": ["person-1"],
+      "to": ["system-component-1", "system-component-2"],
+      "relationship": "owns",
+      "ownershipType": "primary"
+    },
+    {
+      "id": "assignment-1",
+      "type": "assignment",
+      "from": ["person-1"],
+      "to": ["role-1"],
+      "relationship": "assignedTo",
+      "assignmentType": "primary",
+      "status": "active"
+    },
+    {
+      "id": "mitigation-1",
+      "type": "mitigation",
+      "from": ["control-1"],
+      "to": ["vulnerability-1"],
+      "relationship": "mitigates",
+      "mitigationType": "preventive",
+      "effectiveness": "effective",
+      "status": "implemented"
+    },
+    {
+      "id": "implementation-1",
+      "type": "implementation",
+      "from": ["system-component-2"],
+      "to": ["control-1"],
+      "relationship": "implements",
+      "implementationType": "full",
+      "status": "implemented"
+    }
+  ],
+  "metadata": {
+    "name": "Simple GRC Example",
+    "description": "A simple example of a GRC model",
+    "version": "1.0.0",
+    "createdAt": "2025-03-06T12:00:00Z",
+    "createdBy": "GRC Schema Team"
+  }
+}

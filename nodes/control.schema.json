@@ -1,0 +1,82 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Control Node",
+  "description": "A node representing a control in a GRC model",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../node.schema.json#/definitions/node"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "control"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the control"
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed description of the control"
+        },
+        "controlId": {
+          "type": "string",
+          "description": "Identifier for the control (e.g., from a framework)"
+        },
+        "category": {
+          "type": "string",
+          "description": "Category of the control",
+          "enum": ["preventive", "detective", "corrective", "deterrent", "recovery", "compensating"]
+        },
+        "implementation": {
+          "type": "string",
+          "description": "Implementation type of the control",
+          "enum": ["technical", "administrative", "physical", "hybrid"]
+        },
+        "status": {
+          "type": "string",
+          "description": "Implementation status of the control",
+          "enum": ["planned", "implemented", "partially-implemented", "not-implemented", "not-applicable"]
+        },
+        "automationLevel": {
+          "type": "string",
+          "description": "Level of automation for the control",
+          "enum": ["manual", "semi-automated", "automated"]
+        },
+        "testFrequency": {
+          "type": "string",
+          "description": "How often the control is tested",
+          "enum": ["continuous", "daily", "weekly", "monthly", "quarterly", "annually", "as-needed"]
+        },
+        "lastTestedDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the control was last tested"
+        },
+        "effectiveness": {
+          "type": "string",
+          "description": "Effectiveness rating of the control",
+          "enum": ["ineffective", "partially-effective", "effective", "highly-effective", "not-assessed"]
+        },
+        "frameworks": {
+          "type": "array",
+          "description": "Compliance frameworks the control addresses",
+          "items": {
+            "type": "string"
+          }
+        },
+        "costToImplement": {
+          "type": "number",
+          "description": "Cost to implement the control"
+        },
+        "costToMaintain": {
+          "type": "number",
+          "description": "Annual cost to maintain the control"
+        }
+      },
+      "required": ["name", "description", "category", "status"]
+    }
+  ],
+  "$id": "control.schema.json"
+}

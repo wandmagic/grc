@@ -1,0 +1,238 @@
+{
+  "$schema": "../dist/grc-schema.json",
+  "id": "bundle-compliance",
+  "type": "bundle",
+  "nodes": [
+    {
+      "id": "compliance-requirement-1",
+      "type": "compliance-requirement",
+      "name": "Data Encryption at Rest",
+      "description": "All sensitive data must be encrypted at rest using industry-standard encryption algorithms",
+      "requirementId": "PCI-DSS-3.4",
+      "framework": "PCI DSS",
+      "category": "Data Protection",
+      "version": "3.2.1",
+      "complianceStatus": "compliant"
+    },
+    {
+      "id": "compliance-requirement-2",
+      "type": "compliance-requirement",
+      "name": "Access Control",
+      "description": "Restrict access to system components and cardholder data to only those individuals whose job requires such access",
+      "requirementId": "PCI-DSS-7.1",
+      "framework": "PCI DSS",
+      "category": "Access Control",
+      "version": "3.2.1",
+      "complianceStatus": "partially-compliant"
+    },
+    {
+      "id": "compliance-requirement-3",
+      "type": "compliance-requirement",
+      "name": "Vulnerability Management",
+      "description": "Identify and address vulnerabilities in system components and software",
+      "requirementId": "PCI-DSS-6.1",
+      "framework": "PCI DSS",
+      "category": "Vulnerability Management",
+      "version": "3.2.1",
+      "complianceStatus": "non-compliant"
+    },
+    {
+      "id": "control-1",
+      "type": "control",
+      "name": "Database Encryption",
+      "description": "Implement database-level encryption for all sensitive data",
+      "controlId": "ENC-001",
+      "category": "preventive",
+      "implementation": "technical",
+      "status": "implemented",
+      "effectiveness": "effective"
+    },
+    {
+      "id": "control-2",
+      "type": "control",
+      "name": "Role-Based Access Control",
+      "description": "Implement role-based access control for all systems",
+      "controlId": "ACC-001",
+      "category": "preventive",
+      "implementation": "technical",
+      "status": "partially-implemented",
+      "effectiveness": "partially-effective"
+    },
+    {
+      "id": "control-3",
+      "type": "control",
+      "name": "Vulnerability Scanning",
+      "description": "Regular vulnerability scanning of all systems",
+      "controlId": "VUL-001",
+      "category": "detective",
+      "implementation": "technical",
+      "status": "planned",
+      "effectiveness": "not-assessed"
+    },
+    {
+      "id": "system-component-1",
+      "type": "system-component",
+      "name": "Customer Database",
+      "description": "Database storing customer information",
+      "category": "data",
+      "status": "active",
+      "criticality": "critical"
+    },
+    {
+      "id": "system-component-2",
+      "type": "system-component",
+      "name": "Identity Management System",
+      "description": "System for managing user identities and access",
+      "category": "software",
+      "status": "active",
+      "criticality": "high"
+    },
+    {
+      "id": "policy-1",
+      "type": "policy",
+      "name": "Data Protection Policy",
+      "description": "Policy governing the protection of sensitive data",
+      "category": "security",
+      "version": "2.0",
+      "status": "published",
+      "effectiveDate": "2024-01-01"
+    },
+    {
+      "id": "policy-2",
+      "type": "policy",
+      "name": "Access Control Policy",
+      "description": "Policy governing access to systems and data",
+      "category": "security",
+      "version": "1.5",
+      "status": "published",
+      "effectiveDate": "2023-06-15"
+    },
+    {
+      "id": "person-1",
+      "type": "person",
+      "firstName": "Jane",
+      "lastName": "Smith",
+      "email": "jane.smith@example.com",
+      "department": "Security",
+      "title": "Security Officer"
+    },
+    {
+      "id": "role-1",
+      "type": "role",
+      "name": "Security Officer",
+      "description": "Responsible for security and compliance",
+      "category": "security",
+      "accessLevel": "high"
+    },
+    {
+      "id": "plan-of-action-item-1",
+      "type": "plan-of-action-item",
+      "name": "Implement Vulnerability Management Program",
+      "description": "Implement a comprehensive vulnerability management program",
+      "status": "in-progress",
+      "priority": "high",
+      "dueDate": "2025-06-30",
+      "startDate": "2025-01-15"
+    }
+  ],
+  "links": [
+    {
+      "id": "compliance-1",
+      "type": "compliance",
+      "from": ["control-1"],
+      "to": ["compliance-requirement-1"],
+      "relationship": "satisfies",
+      "complianceType": "fully-satisfies",
+      "status": "verified"
+    },
+    {
+      "id": "compliance-2",
+      "type": "compliance",
+      "from": ["control-2"],
+      "to": ["compliance-requirement-2"],
+      "relationship": "satisfies",
+      "complianceType": "partially-satisfies",
+      "status": "implemented"
+    },
+    {
+      "id": "compliance-3",
+      "type": "compliance",
+      "from": ["control-3"],
+      "to": ["compliance-requirement-3"],
+      "relationship": "satisfies",
+      "complianceType": "fully-satisfies",
+      "status": "planned"
+    },
+    {
+      "id": "implementation-1",
+      "type": "implementation",
+      "from": ["system-component-1"],
+      "to": ["control-1"],
+      "relationship": "implements",
+      "implementationType": "full",
+      "status": "implemented"
+    },
+    {
+      "id": "implementation-2",
+      "type": "implementation",
+      "from": ["system-component-2"],
+      "to": ["control-2"],
+      "relationship": "implements",
+      "implementationType": "partial",
+      "status": "in-progress"
+    },
+    {
+      "id": "implementation-3",
+      "type": "implementation",
+      "from": ["policy-1"],
+      "to": ["control-1"],
+      "relationship": "implements",
+      "implementationType": "full",
+      "status": "implemented"
+    },
+    {
+      "id": "implementation-4",
+      "type": "implementation",
+      "from": ["policy-2"],
+      "to": ["control-2"],
+      "relationship": "implements",
+      "implementationType": "full",
+      "status": "implemented"
+    },
+    {
+      "id": "assignment-1",
+      "type": "assignment",
+      "from": ["person-1"],
+      "to": ["role-1"],
+      "relationship": "assignedTo",
+      "assignmentType": "primary",
+      "status": "active"
+    },
+    {
+      "id": "responsibility-1",
+      "type": "responsibility-assignment",
+      "from": ["role-1"],
+      "to": ["control-1", "control-2", "control-3"],
+      "relationship": "responsible-for",
+      "responsibilityType": "accountable",
+      "status": "active"
+    },
+    {
+      "id": "assignment-2",
+      "type": "assignment",
+      "from": ["person-1"],
+      "to": ["plan-of-action-item-1"],
+      "relationship": "assignedTo",
+      "assignmentType": "primary",
+      "status": "active"
+    }
+  ],
+  "metadata": {
+    "name": "Compliance Example",
+    "description": "An example of a compliance-focused GRC model",
+    "version": "1.0.0",
+    "createdAt": "2025-03-06T14:30:00Z",
+    "createdBy": "GRC Schema Team",
+    "tags": ["compliance", "PCI DSS", "example"]
+  }
+}

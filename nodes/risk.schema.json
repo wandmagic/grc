@@ -1,0 +1,70 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Risk Node",
+  "description": "A node representing a risk in a GRC model",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../node.schema.json#/definitions/node"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "risk"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the risk"
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed description of the risk"
+        },
+        "category": {
+          "type": "string",
+          "description": "Category of the risk",
+          "enum": ["strategic", "operational", "financial", "compliance", "reputational", "security", "privacy", "technical", "other"]
+        },
+        "likelihood": {
+          "type": "string",
+          "description": "Likelihood of the risk occurring",
+          "enum": ["rare", "unlikely", "possible", "likely", "almost-certain"]
+        },
+        "impact": {
+          "type": "string",
+          "description": "Impact if the risk occurs",
+          "enum": ["insignificant", "minor", "moderate", "major", "severe"]
+        },
+        "riskScore": {
+          "type": "number",
+          "description": "Calculated risk score"
+        },
+        "status": {
+          "type": "string",
+          "description": "Current status of the risk",
+          "enum": ["identified", "assessed", "mitigated", "accepted", "transferred", "avoided", "closed"]
+        },
+        "identificationDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the risk was identified"
+        },
+        "reviewDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the risk should be reviewed"
+        },
+        "mitigationStrategy": {
+          "type": "string",
+          "description": "Strategy for mitigating the risk"
+        },
+        "residualRiskScore": {
+          "type": "number",
+          "description": "Residual risk score after mitigation"
+        }
+      },
+      "required": ["name", "description", "likelihood", "impact"]
+    }
+  ],
+  "$id": "risk.schema.json"
+}

@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Person Node",
+  "description": "A node representing a person in a GRC model",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../node.schema.json#/definitions/node"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "person"
+        },
+        "firstName": {
+          "type": "string",
+          "description": "First name of the person"
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Last name of the person"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Email address of the person"
+        },
+        "phone": {
+          "type": "string",
+          "description": "Phone number of the person"
+        },
+        "department": {
+          "type": "string",
+          "description": "Department the person belongs to"
+        },
+        "title": {
+          "type": "string",
+          "description": "Job title of the person"
+        },
+        "employeeId": {
+          "type": "string",
+          "description": "Employee ID of the person"
+        },
+        "status": {
+          "type": "string",
+          "description": "Employment status of the person",
+          "enum": ["active", "inactive", "contractor", "temporary"]
+        },
+        "location": {
+          "type": "string",
+          "description": "Physical location or office of the person"
+        }
+      },
+      "required": ["firstName", "lastName", "email"]
+    }
+  ],
+  "$id": "person.schema.json"
+}

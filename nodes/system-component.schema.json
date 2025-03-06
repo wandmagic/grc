@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "System Component Node",
+  "description": "A node representing a system component in a GRC model",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../node.schema.json#/definitions/node"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "system-component"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the system component"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the system component"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the system component"
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the system component (e.g., active, deprecated, planned)",
+          "enum": ["active", "deprecated", "planned", "retired"]
+        },
+        "owner": {
+          "type": "string",
+          "description": "Owner of the system component"
+        },
+        "criticality": {
+          "type": "string",
+          "description": "Criticality level of the system component",
+          "enum": ["low", "medium", "high", "critical"]
+        },
+        "category": {
+          "type": "string",
+          "description": "Category of the system component (e.g., hardware, software, network)",
+          "enum": ["hardware", "software", "network", "service", "data", "other"]
+        }
+      },
+      "required": ["name"]
+    }
+  ],
+  "$id": "system-component.schema.json"
+}

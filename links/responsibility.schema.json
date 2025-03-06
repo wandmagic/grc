@@ -1,0 +1,73 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Responsibility Link",
+  "description": "A link representing a responsibility relationship between nodes",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../link.schema.json#/definitions/link"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "responsibility-assignment"
+        },
+        "relationship": {
+          "const": "responsible-for"
+        },
+        "from": {
+          "type": "array",
+          "description": "IDs of the source nodes (format: 'type-id')",
+          "items": {
+            "type": "string",
+            "pattern": "^(person|role)-.+"
+          },
+          "minItems": 1
+        },
+        "to": {
+          "type": "array",
+          "description": "IDs of the target nodes (format: 'type-id')",
+          "items": {
+            "type": "string",
+            "pattern": "^(control|policy|system-component|responsibility|risk)-.+"
+          },
+          "minItems": 1
+        },
+        "responsibilityType": {
+          "type": "string",
+          "description": "Type of responsibility relationship",
+          "enum": ["accountable", "responsible", "consulted", "informed", "supportive"]
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the responsibility began"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the responsibility ends or ended"
+        },
+        "delegatedBy": {
+          "type": "string",
+          "description": "Person or entity that delegated the responsibility"
+        },
+        "delegatedTo": {
+          "type": "string",
+          "description": "Person or entity to whom the responsibility is delegated"
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the responsibility",
+          "enum": ["active", "inactive", "delegated", "revoked"]
+        },
+        "documentReference": {
+          "type": "string",
+          "description": "Reference to a document that establishes the responsibility"
+        }
+      },
+      "required": ["responsibilityType", "status"]
+    }
+  ],
+  "$id": "responsibility-assignment.schema.json"
+}

@@ -1,0 +1,419 @@
+{
+  "$schema": "../dist/grc-schema.json",
+  "id": "bundle-risk-management",
+  "type": "bundle",
+  "nodes": [
+    {
+      "id": "system-component-1",
+      "type": "system-component",
+      "name": "Cloud Infrastructure",
+      "description": "AWS cloud infrastructure hosting critical applications",
+      "category": "service",
+      "status": "active",
+      "criticality": "critical"
+    },
+    {
+      "id": "system-component-2",
+      "type": "system-component",
+      "name": "Customer Portal",
+      "description": "Web application for customer self-service",
+      "category": "software",
+      "status": "active",
+      "criticality": "high"
+    },
+    {
+      "id": "system-component-3",
+      "type": "system-component",
+      "name": "Internal Network",
+      "description": "Corporate internal network",
+      "category": "network",
+      "status": "active",
+      "criticality": "high"
+    },
+    {
+      "id": "vulnerability-1",
+      "type": "vulnerability",
+      "name": "Outdated TLS Configuration",
+      "description": "TLS 1.0/1.1 still enabled on web servers",
+      "category": "network",
+      "severity": "medium",
+      "status": "confirmed",
+      "cvssScore": 5.3
+    },
+    {
+      "id": "vulnerability-2",
+      "type": "vulnerability",
+      "name": "Weak Password Policy",
+      "description": "Password policy does not enforce sufficient complexity",
+      "category": "software",
+      "severity": "high",
+      "status": "confirmed",
+      "cvssScore": 7.2
+    },
+    {
+      "id": "vulnerability-3",
+      "type": "vulnerability",
+      "name": "Unpatched Systems",
+      "description": "Several systems missing critical security patches",
+      "category": "software",
+      "severity": "critical",
+      "status": "confirmed",
+      "cvssScore": 9.1
+    },
+    {
+      "id": "threat-1",
+      "type": "threat",
+      "name": "Man-in-the-Middle Attack",
+      "description": "Interception of network traffic to steal sensitive data",
+      "category": "cyber",
+      "source": "external",
+      "threatActor": "criminal",
+      "motivation": "financial",
+      "capability": "medium",
+      "likelihood": "possible"
+    },
+    {
+      "id": "threat-2",
+      "type": "threat",
+      "name": "Credential Theft",
+      "description": "Theft of user credentials through various means",
+      "category": "cyber",
+      "source": "external",
+      "threatActor": "criminal",
+      "motivation": "financial",
+      "capability": "high",
+      "likelihood": "likely"
+    },
+    {
+      "id": "threat-3",
+      "type": "threat",
+      "name": "Ransomware Attack",
+      "description": "Encryption of data and systems for ransom",
+      "category": "cyber",
+      "source": "external",
+      "threatActor": "criminal",
+      "motivation": "financial",
+      "capability": "high",
+      "likelihood": "possible"
+    },
+    {
+      "id": "risk-1",
+      "type": "risk",
+      "name": "Data Breach",
+      "description": "Unauthorized access to sensitive customer data",
+      "category": "security",
+      "likelihood": "possible",
+      "impact": "severe",
+      "riskScore": 16,
+      "status": "mitigated"
+    },
+    {
+      "id": "risk-2",
+      "type": "risk",
+      "name": "Service Disruption",
+      "description": "Disruption of critical business services",
+      "category": "operational",
+      "likelihood": "possible",
+      "impact": "major",
+      "riskScore": 12,
+      "status": "mitigated"
+    },
+    {
+      "id": "risk-3",
+      "type": "risk",
+      "name": "Regulatory Non-Compliance",
+      "description": "Failure to comply with regulatory requirements",
+      "category": "compliance",
+      "likelihood": "unlikely",
+      "impact": "major",
+      "riskScore": 8,
+      "status": "assessed"
+    },
+    {
+      "id": "control-1",
+      "type": "control",
+      "name": "TLS Configuration Hardening",
+      "description": "Disable outdated TLS versions and enforce strong cipher suites",
+      "controlId": "NET-001",
+      "category": "preventive",
+      "implementation": "technical",
+      "status": "implemented",
+      "effectiveness": "effective"
+    },
+    {
+      "id": "control-2",
+      "type": "control",
+      "name": "Strong Password Policy",
+      "description": "Enforce strong password requirements and MFA",
+      "controlId": "ACC-002",
+      "category": "preventive",
+      "implementation": "technical",
+      "status": "implemented",
+      "effectiveness": "effective"
+    },
+    {
+      "id": "control-3",
+      "type": "control",
+      "name": "Patch Management",
+      "description": "Regular patching of all systems",
+      "controlId": "SYS-001",
+      "category": "preventive",
+      "implementation": "technical",
+      "status": "implemented",
+      "effectiveness": "effective"
+    },
+    {
+      "id": "control-4",
+      "type": "control",
+      "name": "Data Encryption",
+      "description": "Encryption of sensitive data in transit and at rest",
+      "controlId": "DAT-001",
+      "category": "preventive",
+      "implementation": "technical",
+      "status": "implemented",
+      "effectiveness": "effective"
+    },
+    {
+      "id": "control-5",
+      "type": "control",
+      "name": "Backup and Recovery",
+      "description": "Regular backups and tested recovery procedures",
+      "controlId": "DR-001",
+      "category": "recovery",
+      "implementation": "technical",
+      "status": "implemented",
+      "effectiveness": "effective"
+    },
+    {
+      "id": "plan-of-action-item-1",
+      "type": "plan-of-action-item",
+      "name": "Implement MFA for All Users",
+      "description": "Implement multi-factor authentication for all users",
+      "status": "completed",
+      "priority": "high",
+      "dueDate": "2024-12-31",
+      "startDate": "2024-10-01",
+      "completionDate": "2024-12-15"
+    },
+    {
+      "id": "plan-of-action-item-2",
+      "type": "plan-of-action-item",
+      "name": "Upgrade TLS Configuration",
+      "description": "Upgrade TLS configuration on all web servers",
+      "status": "completed",
+      "priority": "medium",
+      "dueDate": "2024-11-30",
+      "startDate": "2024-10-15",
+      "completionDate": "2024-11-20"
+    },
+    {
+      "id": "person-1",
+      "type": "person",
+      "firstName": "Michael",
+      "lastName": "Johnson",
+      "email": "michael.johnson@example.com",
+      "department": "IT Security",
+      "title": "Risk Manager"
+    },
+    {
+      "id": "role-1",
+      "type": "role",
+      "name": "Risk Manager",
+      "description": "Responsible for managing organizational risks",
+      "category": "security",
+      "accessLevel": "high"
+    }
+  ],
+  "links": [
+    {
+      "id": "threat-link-1",
+      "type": "threat-relationship",
+      "from": ["threat-1"],
+      "to": ["vulnerability-1"],
+      "relationship": "threatens",
+      "threatType": "exploits",
+      "likelihood": "possible",
+      "impact": "major"
+    },
+    {
+      "id": "threat-link-2",
+      "type": "threat-relationship",
+      "from": ["threat-2"],
+      "to": ["vulnerability-2"],
+      "relationship": "threatens",
+      "threatType": "exploits",
+      "likelihood": "likely",
+      "impact": "major"
+    },
+    {
+      "id": "threat-link-3",
+      "type": "threat-relationship",
+      "from": ["threat-3"],
+      "to": ["vulnerability-3"],
+      "relationship": "threatens",
+      "threatType": "exploits",
+      "likelihood": "possible",
+      "impact": "severe"
+    },
+    {
+      "id": "threat-link-4",
+      "type": "threat-relationship",
+      "from": ["threat-1"],
+      "to": ["system-component-2"],
+      "relationship": "threatens",
+      "threatType": "targets",
+      "likelihood": "possible",
+      "impact": "major"
+    },
+    {
+      "id": "threat-link-5",
+      "type": "threat-relationship",
+      "from": ["threat-2"],
+      "to": ["system-component-1", "system-component-2"],
+      "relationship": "threatens",
+      "threatType": "targets",
+      "likelihood": "likely",
+      "impact": "major"
+    },
+    {
+      "id": "threat-link-6",
+      "type": "threat-relationship",
+      "from": ["threat-3"],
+      "to": ["system-component-1", "system-component-2", "system-component-3"],
+      "relationship": "threatens",
+      "threatType": "targets",
+      "likelihood": "possible",
+      "impact": "severe"
+    },
+    {
+      "id": "mitigation-1",
+      "type": "mitigation",
+      "from": ["control-1"],
+      "to": ["vulnerability-1"],
+      "relationship": "mitigates",
+      "mitigationType": "preventive",
+      "effectiveness": "effective",
+      "status": "implemented"
+    },
+    {
+      "id": "mitigation-2",
+      "type": "mitigation",
+      "from": ["control-2"],
+      "to": ["vulnerability-2"],
+      "relationship": "mitigates",
+      "mitigationType": "preventive",
+      "effectiveness": "effective",
+      "status": "implemented"
+    },
+    {
+      "id": "mitigation-3",
+      "type": "mitigation",
+      "from": ["control-3"],
+      "to": ["vulnerability-3"],
+      "relationship": "mitigates",
+      "mitigationType": "preventive",
+      "effectiveness": "effective",
+      "status": "implemented"
+    },
+    {
+      "id": "mitigation-4",
+      "type": "mitigation",
+      "from": ["control-4"],
+      "to": ["risk-1"],
+      "relationship": "mitigates",
+      "mitigationType": "preventive",
+      "effectiveness": "effective",
+      "status": "implemented"
+    },
+    {
+      "id": "mitigation-5",
+      "type": "mitigation",
+      "from": ["control-5"],
+      "to": ["risk-2"],
+      "relationship": "mitigates",
+      "mitigationType": "recovery",
+      "effectiveness": "effective",
+      "status": "implemented"
+    },
+    {
+      "id": "implementation-1",
+      "type": "implementation",
+      "from": ["system-component-2"],
+      "to": ["control-1"],
+      "relationship": "implements",
+      "implementationType": "full",
+      "status": "implemented"
+    },
+    {
+      "id": "implementation-2",
+      "type": "implementation",
+      "from": ["system-component-1", "system-component-2"],
+      "to": ["control-2"],
+      "relationship": "implements",
+      "implementationType": "full",
+      "status": "implemented"
+    },
+    {
+      "id": "implementation-3",
+      "type": "implementation",
+      "from": ["system-component-1", "system-component-2", "system-component-3"],
+      "to": ["control-3"],
+      "relationship": "implements",
+      "implementationType": "full",
+      "status": "implemented"
+    },
+    {
+      "id": "implementation-4",
+      "type": "implementation",
+      "from": ["system-component-1", "system-component-2"],
+      "to": ["control-4"],
+      "relationship": "implements",
+      "implementationType": "full",
+      "status": "implemented"
+    },
+    {
+      "id": "implementation-5",
+      "type": "implementation",
+      "from": ["system-component-1"],
+      "to": ["control-5"],
+      "relationship": "implements",
+      "implementationType": "full",
+      "status": "implemented"
+    },
+    {
+      "id": "assignment-1",
+      "type": "assignment",
+      "from": ["person-1"],
+      "to": ["role-1"],
+      "relationship": "assignedTo",
+      "assignmentType": "primary",
+      "status": "active"
+    },
+    {
+      "id": "responsibility-1",
+      "type": "responsibility-assignment",
+      "from": ["role-1"],
+      "to": ["risk-1", "risk-2", "risk-3"],
+      "relationship": "responsible-for",
+      "responsibilityType": "accountable",
+      "status": "active"
+    },
+    {
+      "id": "assignment-2",
+      "type": "assignment",
+      "from": ["person-1"],
+      "to": ["plan-of-action-item-1", "plan-of-action-item-2"],
+      "relationship": "assignedTo",
+      "assignmentType": "primary",
+      "status": "active"
+    }
+  ],
+  "metadata": {
+    "name": "Risk Management Example",
+    "description": "An example of a risk management-focused GRC model",
+    "version": "1.0.0",
+    "createdAt": "2025-03-06T15:45:00Z",
+    "createdBy": "GRC Schema Team",
+    "tags": ["risk management", "threat modeling", "example"]
+  }
+}
