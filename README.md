@@ -193,12 +193,13 @@ https://[username].github.io/grc-schema/
 
 ### Deployment
 
-The GitHub Pages site is automatically deployed using GitHub Actions when changes are pushed to the main branch. The workflow:
+The GitHub Pages site is automatically deployed using GitHub Actions when changes are pushed to the master branch. The workflow:
 
 1. Compiles the schemas
 2. Copies the examples
-3. Builds the frontend application
-4. Deploys the built files to GitHub Pages
+3. Builds the frontend application (using --legacy-peer-deps to handle dependency conflicts)
+4. Copies the frontend files to the root of the dist directory
+5. Deploys the dist directory to GitHub Pages
 
 You can also manually trigger the deployment from the Actions tab in the GitHub repository.
 

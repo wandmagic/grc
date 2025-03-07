@@ -8,7 +8,7 @@
     "validate": "node scripts/validate-examples.js",
     "copy-examples": "node scripts/copy-examples.js",
     "dev": "npm run compile && npm run copy-examples && cd frontend && npm run dev",
-    "build": "npm run compile && npm run copy-examples && cd frontend && npm run build",
+    "build": "npm run compile && npm run copy-examples && cd frontend && npm ci --legacy-peer-deps && npm run build",
     "postbuild": "touch dist/.nojekyll && cp -r dist/frontend/* dist/ && cp -r dist/frontend/.* dist/ 2>/dev/null || true",
     "preview": "cd frontend && npm run preview",
     "test": "npm run compile && npm run validate",

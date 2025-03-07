@@ -4,7 +4,7 @@ name: Deploy static content to Pages
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: ["main"]
+    branches: ["master"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -43,7 +43,7 @@ jobs:
       - name: Copy examples
         run: npm run copy-examples
       - name: Build frontend
-        run: cd frontend && npm ci && npm run build
+        run: cd frontend && npm ci --legacy-peer-deps && npm run build
       - name: Create .nojekyll file
         run: touch dist/.nojekyll
       - name: Copy frontend files to dist root
