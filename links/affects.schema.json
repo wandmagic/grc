@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Affects Link",
+  "description": "A link representing how a vulnerability affects a system component",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../link.schema.json#/definitions/link"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "affects"
+        },
+        "relationship": {
+          "const": "affects"
+        },
+        "severity": {
+          "type": "string",
+          "description": "Severity of the impact on the affected component",
+          "enum": ["critical", "high", "medium", "low", "info"]
+        },
+        "exploitability": {
+          "type": "string",
+          "description": "Exploitability of the vulnerability on this component",
+          "enum": ["easy", "moderate", "difficult", "very-difficult"]
+        },
+        "affectedVersion": {
+          "type": "string",
+          "description": "Version of the component affected by the vulnerability"
+        },
+        "fixedVersion": {
+          "type": "string",
+          "description": "Version of the component where the vulnerability is fixed"
+        },
+        "affectedFunctionality": {
+          "type": "string",
+          "description": "Specific functionality of the component affected by the vulnerability"
+        },
+        "workaround": {
+          "type": "string",
+          "description": "Workaround for the vulnerability on this component"
+        }
+      },
+      "required": ["severity"]
+    }
+  ],
+  "$id": "affects.schema.json"
+}

@@ -15,22 +15,6 @@
         "relationship": {
           "const": "responsible-for"
         },
-        "from": {
-          "type": "array",
-          "description": "IDs of the source nodes",
-          "items": {
-            "type": "string"
-          },
-          "minItems": 1
-        },
-        "to": {
-          "type": "array",
-          "description": "IDs of the target nodes",
-          "items": {
-            "type": "string"
-          },
-          "minItems": 1
-        },
         "responsibilityType": {
           "type": "string",
           "description": "Type of responsibility relationship",

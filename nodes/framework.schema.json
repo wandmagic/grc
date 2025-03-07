@@ -1,0 +1,65 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Framework Node",
+  "description": "A node representing a compliance or governance framework in a GRC model",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../node.schema.json#/definitions/node"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "framework"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the framework"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the framework"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the framework"
+        },
+        "publisher": {
+          "type": "string",
+          "description": "Organization that published the framework"
+        },
+        "publicationDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the framework was published"
+        },
+        "category": {
+          "type": "string",
+          "description": "Category of the framework",
+          "enum": ["security", "privacy", "compliance", "governance", "risk", "industry-specific", "other"]
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to the framework documentation"
+        },
+        "applicability": {
+          "type": "string",
+          "description": "Applicability of the framework to the organization",
+          "enum": ["mandatory", "voluntary", "recommended", "not-applicable"]
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the framework",
+          "enum": ["active", "deprecated", "superseded", "draft"]
+        },
+        "supersededBy": {
+          "type": "string",
+          "description": "ID of the framework that supersedes this one (if applicable)"
+        }
+      },
+      "required": ["name", "version", "category"]
+    }
+  ],
+  "$id": "framework.schema.json"
+}

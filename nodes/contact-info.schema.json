@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Contact Info Node",
+  "description": "A node representing contact information in a GRC model",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../node.schema.json#/definitions/node"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "contact-info"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name or label for the contact information"
+        },
+        "contactType": {
+          "type": "string",
+          "description": "Type of contact information",
+          "enum": ["email", "phone", "mobile", "fax", "address", "website", "social-media", "messaging", "other"]
+        },
+        "value": {
+          "type": "string",
+          "description": "Value of the contact information (e.g., email address, phone number)"
+        },
+        "category": {
+          "type": "string",
+          "description": "Category of the contact information",
+          "enum": ["work", "personal", "emergency", "public", "private", "other"]
+        },
+        "isPrimary": {
+          "type": "boolean",
+          "description": "Whether this is the primary contact method of its type",
+          "default": false
+        },
+        "isPublic": {
+          "type": "boolean",
+          "description": "Whether this contact information is publicly available",
+          "default": false
+        },
+        "validFrom": {
+          "type": "string",
+          "format": "date",
+          "description": "Date from which this contact information is valid"
+        },
+        "validUntil": {
+          "type": "string",
+          "format": "date",
+          "description": "Date until which this contact information is valid"
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the contact information",
+          "enum": ["active", "inactive", "verified", "unverified"]
+        },
+        "verificationDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the contact information was last verified"
+        }
+      },
+      "required": ["contactType", "value"]
+    }
+  ],
+  "$id": "contact-info.schema.json"
+}

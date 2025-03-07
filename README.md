@@ -44,7 +44,9 @@ The following node types are defined:
 
 ### Node IDs
 
-Node IDs are flexible and can be any string. We recommend using descriptive IDs that reflect the entity they represent (e.g., "john-doe" for a person, "web-server" for a system component).
+Node IDs should be globally unique across all nodes in a bundle. We recommend using ShortUUID format (~22 character encoded UUID, e.g., 'keATt6KQsAVXDUbZcRdg6i') for database compatibility and to ensure uniqueness.
+
+All nodes have an optional `name` field that can be used for human-readable identification. When migrating from descriptive IDs to ShortUUIDs, the original descriptive ID (e.g., "john-doe", "web-server") can be preserved in this field.
 
 ### Link Types
 
@@ -91,19 +93,21 @@ Here's a simple example of a GRC bundle:
 
 ```json
 {
-  "id": "bundle-1",
+  "id": "keATt6KQsAVXDUbZcRdg6i",
   "type": "bundle",
+  "name": "bundle-1",
   "nodes": [
     {
-      "id": "web-server",
+      "id": "fkB7EkQsAVXDUbZcRdg6j",
       "type": "system-component",
-      "name": "Web Server",
+      "name": "web-server",
       "description": "Main web server",
       "category": "software"
     },
     {
-      "id": "john-doe",
+      "id": "gLm9EkQsAVXDUbZcRdg6k",
       "type": "person",
+      "name": "john-doe",
       "firstName": "John",
       "lastName": "Doe",
       "email": "john.doe@example.com"
@@ -111,10 +115,11 @@ Here's a simple example of a GRC bundle:
   ],
   "links": [
     {
-      "id": "john-owns-server",
+      "id": "hPq2EkQsAVXDUbZcRdg6l",
       "type": "ownership",
-      "from": ["john-doe"],
-      "to": ["web-server"],
+      "name": "john-owns-server",
+      "from": ["gLm9EkQsAVXDUbZcRdg6k"],
+      "to": ["fkB7EkQsAVXDUbZcRdg6j"],
       "relationship": "owns",
       "ownershipType": "primary"
     }

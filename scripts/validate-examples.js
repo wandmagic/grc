@@ -3,7 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 
-// Check if Ajv is installed
+// Check if required dependencies are installed
 try {
   require.resolve('ajv');
   require.resolve('ajv-formats');
@@ -103,9 +103,21 @@ exampleFiles.forEach(file => {
       console.log(`❌ ${relativePath} is invalid:`);
       hasErrors = true;
       
-      // Format and display validation errors
+      // Format and display validation errors with file and line number links
+      const fileContent = fs.readFileSync(file, 'utf8');
+      const lines = fileContent.split('\n');
+      
       validate.errors.forEach(error => {
-        console.log(`  - ${error.instancePath || '/'}: ${error.message}`);
+        const path = error.instancePath || '/';
+        const lineNumber = findLineNumber(fileContent, path, error);
+        
+        if (lineNumber) {
+          // Format as clickable link: file:line:column
+          console.log(`  - ${relativePath}:${lineNumber}:1 ${path}: ${error.message}`);
+        } else {
+          console.log(`  - ${path}: ${error.message}`);
+        }
+        
         if (error.params) {
           console.log(`    Params: ${JSON.stringify(error.params)}`);
         }
@@ -124,4 +136,53 @@ if (hasErrors) {
 } else {
   console.log('✅ All examples are valid.');
   process.exit(0);
+}
+
+/**
+ * Find the line number in a JSON file for a given JSON path
+ * @param {string} content - The file content
+ * @param {string} jsonPath - The JSON path (e.g., /nodes/0/id)
+ * @param {object} error - The validation error object
+ * @returns {number|null} - The line number or null if not found
+ */
+function findLineNumber(content, jsonPath, error) {
+  if (jsonPath === '/') {
+    return 1; // Root path, return first line
+  }
+  
+  // Convert JSON path to parts (e.g., /nodes/0/id -> ['nodes', '0', 'id'])
+  const parts = jsonPath.split('/').filter(Boolean);
+  
+  // If we have no parts, return null
+  if (parts.length === 0) {
+    return null;
+  }
+  
+  // Try to find the line by searching for the property name or value
+  let searchString = '';
+  
+  // If we have a property name in the error params, use it
+  if (error.params && error.params.missingProperty) {
+    searchString = `"${error.params.missingProperty}"`;
+  } 
+  // Otherwise use the last part of the path
+  else {
+    const lastPart = parts[parts.length - 1];
+    // If the last part is a number (array index), use the second to last part
+    if (!isNaN(parseInt(lastPart)) && parts.length > 1) {
+      searchString = `"${parts[parts.length - 2]}"`;
+    } else {
+      searchString = `"${lastPart}"`;
+    }
+  }
+  
+  // Search for the string in the content
+  const lines = content.split('\n');
+  for (let i = 0; i < lines.length; i++) {
+    if (lines[i].includes(searchString)) {
+      return i + 1; // Line numbers are 1-based
+    }
+  }
+  
+  return null;
 }

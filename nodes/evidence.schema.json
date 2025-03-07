@@ -1,0 +1,66 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Evidence Node",
+  "description": "A node representing evidence in a GRC model",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../node.schema.json#/definitions/node"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "evidence"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the evidence"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the evidence"
+        },
+        "evidenceType": {
+          "type": "string",
+          "description": "Type of evidence",
+          "enum": ["document", "screenshot", "log", "report", "attestation", "certification", "other"]
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL or location of the evidence"
+        },
+        "collectionDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the evidence was collected"
+        },
+        "expirationDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the evidence expires (if applicable)"
+        },
+        "collectedBy": {
+          "type": "string",
+          "description": "ID of the person who collected the evidence"
+        },
+        "verifiedBy": {
+          "type": "string",
+          "description": "ID of the person who verified the evidence"
+        },
+        "verificationDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the evidence was verified"
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the evidence",
+          "enum": ["collected", "verified", "expired", "rejected", "pending"]
+        }
+      },
+      "required": ["name", "evidenceType", "status"]
+    }
+  ],
+  "$id": "evidence.schema.json"
+}

@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Evidence Requirement Link",
+  "description": "A link representing a requirement for evidence or the fulfillment of an evidence requirement",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../link.schema.json#/definitions/link"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "evidence-requirement"
+        },
+        "relationship": {
+          "const": "requires-evidence"
+        },
+        "requirementType": {
+          "type": "string",
+          "description": "Type of evidence requirement",
+          "enum": ["mandatory", "optional", "supporting", "alternative"]
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the evidence requirement",
+          "enum": ["required", "fulfilled", "partially-fulfilled", "exempted", "expired"]
+        },
+        "fulfillmentDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the evidence requirement was fulfilled"
+        },
+        "reviewDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the evidence should be reviewed"
+        },
+        "reviewedBy": {
+          "type": "string",
+          "description": "ID of the person who reviewed the evidence"
+        },
+        "notes": {
+          "type": "string",
+          "description": "Notes about the evidence requirement"
+        }
+      },
+      "required": ["requirementType", "status"]
+    }
+  ],
+  "$id": "evidence-requirement.schema.json"
+}

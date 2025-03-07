@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Cost Association Link",
+  "description": "A link representing an association between a cost and another node",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../link.schema.json#/definitions/link"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "cost-association"
+        },
+        "relationship": {
+          "const": "has-cost"
+        },
+        "associationType": {
+          "type": "string",
+          "description": "Type of cost association",
+          "enum": ["direct", "indirect", "allocated", "estimated", "actual"]
+        },
+        "percentage": {
+          "type": "number",
+          "description": "Percentage of the cost allocated to this node (0-100)",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "allocationMethod": {
+          "type": "string",
+          "description": "Method used to allocate the cost",
+          "enum": ["equal", "proportional", "usage-based", "manual", "other"]
+        },
+        "notes": {
+          "type": "string",
+          "description": "Notes about the cost association"
+        }
+      },
+      "required": ["associationType"]
+    }
+  ],
+  "$id": "cost-association.schema.json"
+}

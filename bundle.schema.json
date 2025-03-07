@@ -21,7 +21,25 @@
                 "$ref": "nodes/compliance-requirement.schema.json"
               },
               {
+                "$ref": "nodes/contact-info.schema.json"
+              },
+              {
                 "$ref": "nodes/control.schema.json"
+              },
+              {
+                "$ref": "nodes/cost.schema.json"
+              },
+              {
+                "$ref": "nodes/evidence.schema.json"
+              },
+              {
+                "$ref": "nodes/framework.schema.json"
+              },
+              {
+                "$ref": "nodes/location.schema.json"
+              },
+              {
+                "$ref": "nodes/milestone.schema.json"
               },
               {
                 "$ref": "nodes/person.schema.json"
@@ -31,6 +49,9 @@
               },
               {
                 "$ref": "nodes/policy.schema.json"
+              },
+              {
+                "$ref": "nodes/remediation.schema.json"
               },
               {
                 "$ref": "nodes/resource.schema.json"
@@ -51,6 +72,9 @@
                 "$ref": "nodes/system-component.schema.json"
               },
               {
+                "$ref": "nodes/tag.schema.json"
+              },
+              {
                 "$ref": "nodes/threat.schema.json"
               },
               {
@@ -65,13 +89,34 @@
           "items": {
             "oneOf": [
               {
+                "$ref": "links/affects.schema.json"
+              },
+              {
                 "$ref": "links/assignment.schema.json"
               },
               {
                 "$ref": "links/compliance.schema.json"
               },
               {
+                "$ref": "links/contact-association.schema.json"
+              },
+              {
+                "$ref": "links/cost-association.schema.json"
+              },
+              {
+                "$ref": "links/evidence-requirement.schema.json"
+              },
+              {
+                "$ref": "links/framework-association.schema.json"
+              },
+              {
                 "$ref": "links/implementation.schema.json"
+              },
+              {
+                "$ref": "links/located-at.schema.json"
+              },
+              {
+                "$ref": "links/milestone-association.schema.json"
               },
               {
                 "$ref": "links/mitigation.schema.json"
@@ -84,6 +129,9 @@
               },
               {
                 "$ref": "links/responsibility.schema.json"
+              },
+              {
+                "$ref": "links/tagging.schema.json"
               },
               {
                 "$ref": "links/threat.schema.json"

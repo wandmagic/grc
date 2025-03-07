@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Framework Association Link",
+  "description": "A link representing an association between a framework and another node",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../link.schema.json#/definitions/link"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "framework-association"
+        },
+        "relationship": {
+          "const": "associated-with"
+        },
+        "associationType": {
+          "type": "string",
+          "description": "Type of association with the framework",
+          "enum": ["implements", "references", "maps-to", "derived-from", "complies-with"]
+        },
+        "mappingReference": {
+          "type": "string",
+          "description": "Reference to the specific section or control in the framework"
+        },
+        "complianceStatus": {
+          "type": "string",
+          "description": "Compliance status with the framework",
+          "enum": ["compliant", "non-compliant", "partially-compliant", "not-assessed", "not-applicable"]
+        },
+        "mappingNotes": {
+          "type": "string",
+          "description": "Notes about the mapping or association"
+        },
+        "lastAssessmentDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when compliance was last assessed"
+        }
+      },
+      "required": ["associationType"]
+    }
+  ],
+  "$id": "framework-association.schema.json"
+}

@@ -10,11 +10,15 @@
       "properties": {
       "id": {
             "type": "string",
-            "description": "Unique identifier for the node"
+            "description": "Unique identifier for the node. Recommended to use ShortUUID format (~22 character encoded UUID, e.g., 'keATt6KQsAVXDUbZcRdg6i'). Should be globally unique across all nodes."
           },
         "type": {
           "type": "string",
           "description": "Type of the node"
+        },
+        "name": {
+          "type": "string",
+          "description": "Optional human-readable name for the node. When migrating from descriptive IDs to ShortUUIDs, the original descriptive ID can be preserved here."
         }
       }
     }

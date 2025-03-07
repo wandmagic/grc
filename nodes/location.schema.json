@@ -1,0 +1,76 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Location Node",
+  "description": "A node representing a physical or virtual location in a GRC model",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../node.schema.json#/definitions/node"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "location"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the location"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the location"
+        },
+        "locationType": {
+          "type": "string",
+          "description": "Type of location",
+          "enum": ["physical", "virtual", "cloud", "hybrid"]
+        },
+        "address": {
+          "type": "string",
+          "description": "Physical address of the location"
+        },
+        "city": {
+          "type": "string",
+          "description": "City of the location"
+        },
+        "state": {
+          "type": "string",
+          "description": "State or province of the location"
+        },
+        "country": {
+          "type": "string",
+          "description": "Country of the location"
+        },
+        "postalCode": {
+          "type": "string",
+          "description": "Postal code of the location"
+        },
+        "coordinates": {
+          "type": "object",
+          "description": "Geographic coordinates of the location",
+          "properties": {
+            "latitude": {
+              "type": "number",
+              "description": "Latitude coordinate"
+            },
+            "longitude": {
+              "type": "number",
+              "description": "Longitude coordinate"
+            }
+          }
+        },
+        "parentLocation": {
+          "type": "string",
+          "description": "ID of the parent location (if this is a sub-location)"
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the location",
+          "enum": ["active", "inactive", "under-construction", "planned", "decommissioned"]
+        }
+      },
+      "required": ["name", "locationType"]
+    }
+  ],
+  "$id": "location.schema.json"
+}

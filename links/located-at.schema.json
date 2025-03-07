@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Located At Link",
+  "description": "A link representing that a node is located at a specific location",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../link.schema.json#/definitions/link"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "located-at"
+        },
+        "relationship": {
+          "const": "located-at"
+        },
+        "locationType": {
+          "type": "string",
+          "description": "Type of location relationship",
+          "enum": ["primary", "secondary", "temporary", "historical"]
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the entity started being at this location"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the entity stopped being at this location (if applicable)"
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the location relationship",
+          "enum": ["active", "inactive", "planned", "historical"]
+        },
+        "notes": {
+          "type": "string",
+          "description": "Notes about the location relationship"
+        }
+      },
+      "required": ["locationType"]
+    }
+  ],
+  "$id": "located-at.schema.json"
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Tag Node",
+  "description": "A node representing a tag or keyword in a GRC model",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../node.schema.json#/definitions/node"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "tag"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the tag"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the tag"
+        },
+        "category": {
+          "type": "string",
+          "description": "Category of the tag (e.g., technical, business, compliance)"
+        },
+        "color": {
+          "type": "string",
+          "description": "Color code for visual representation of the tag"
+        },
+        "parentTag": {
+          "type": "string",
+          "description": "ID of the parent tag (if this tag is part of a hierarchy)"
+        }
+      },
+      "required": ["name"]
+    }
+  ],
+  "$id": "tag.schema.json"
+}

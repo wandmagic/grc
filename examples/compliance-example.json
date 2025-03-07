@@ -125,8 +125,8 @@
       "accessLevel": "high"
     },
     {
-      "id": "vuln-mgmt-program-poa",
-      "type": "plan-of-action-item",
+      "id": "vuln-mgmt-program-remediation",
+      "type": "remediation",
       "name": "Implement Vulnerability Management Program",
       "description": "Implement a comprehensive vulnerability management program",
       "status": "in-progress",
@@ -139,8 +139,8 @@
     {
       "id": "db-encryption-satisfies-encryption-req",
       "type": "compliance",
-      "from": ["db-encryption-control"],
-      "to": ["data-encryption-req"],
+      "from": "db-encryption-control",
+      "to": "data-encryption-req",
       "relationship": "satisfies",
       "complianceType": "fully-satisfies",
       "status": "verified"
@@ -148,8 +148,8 @@
     {
       "id": "rbac-satisfies-access-control-req",
       "type": "compliance",
-      "from": ["rbac-control"],
-      "to": ["access-control-req"],
+      "from": "rbac-control",
+      "to": "access-control-req",
       "relationship": "satisfies",
       "complianceType": "partially-satisfies",
       "status": "implemented"
@@ -157,8 +157,8 @@
     {
       "id": "vuln-scanning-satisfies-vuln-mgmt-req",
       "type": "compliance",
-      "from": ["vuln-scanning-control"],
-      "to": ["vulnerability-mgmt-req"],
+      "from": "vuln-scanning-control",
+      "to": "vulnerability-mgmt-req",
       "relationship": "satisfies",
       "complianceType": "fully-satisfies",
       "status": "planned"
@@ -166,8 +166,8 @@
     {
       "id": "customer-db-implements-encryption",
       "type": "implementation",
-      "from": ["customer-db"],
-      "to": ["db-encryption-control"],
+      "from": "customer-db",
+      "to": "db-encryption-control",
       "relationship": "implements",
       "implementationType": "full",
       "status": "implemented"
@@ -175,8 +175,8 @@
     {
       "id": "identity-mgmt-implements-rbac",
       "type": "implementation",
-      "from": ["identity-mgmt-system"],
-      "to": ["rbac-control"],
+      "from": "identity-mgmt-system",
+      "to": "rbac-control",
       "relationship": "implements",
       "implementationType": "partial",
       "status": "in-progress"
@@ -184,8 +184,8 @@
     {
       "id": "data-policy-implements-encryption",
       "type": "implementation",
-      "from": ["data-protection-policy"],
-      "to": ["db-encryption-control"],
+      "from": "data-protection-policy",
+      "to": "db-encryption-control",
       "relationship": "implements",
       "implementationType": "full",
       "status": "implemented"
@@ -193,8 +193,8 @@
     {
       "id": "access-policy-implements-rbac",
       "type": "implementation",
-      "from": ["access-control-policy"],
-      "to": ["rbac-control"],
+      "from": "access-control-policy",
+      "to": "rbac-control",
       "relationship": "implements",
       "implementationType": "full",
       "status": "implemented"
@@ -202,26 +202,44 @@
     {
       "id": "jane-assigned-security-officer",
       "type": "assignment",
-      "from": ["jane-smith"],
-      "to": ["security-officer-role"],
+      "from": "jane-smith",
+      "to": "security-officer-role",
       "relationship": "assignedTo",
       "assignmentType": "primary",
       "status": "active"
     },
     {
-      "id": "security-officer-responsible-for-controls",
+      "id": "security-officer-responsible-for-db-encryption",
       "type": "responsibility-assignment",
-      "from": ["security-officer-role"],
-      "to": ["db-encryption-control", "rbac-control", "vuln-scanning-control"],
+      "from": "security-officer-role",
+      "to": "db-encryption-control",
       "relationship": "responsible-for",
       "responsibilityType": "accountable",
       "status": "active"
     },
     {
-      "id": "jane-assigned-vuln-mgmt-poa",
+      "id": "security-officer-responsible-for-rbac",
+      "type": "responsibility-assignment",
+      "from": "security-officer-role",
+      "to": "rbac-control",
+      "relationship": "responsible-for",
+      "responsibilityType": "accountable",
+      "status": "active"
+    },
+    {
+      "id": "security-officer-responsible-for-vuln-scanning",
+      "type": "responsibility-assignment",
+      "from": "security-officer-role",
+      "to": "vuln-scanning-control",
+      "relationship": "responsible-for",
+      "responsibilityType": "accountable",
+      "status": "active"
+    },
+    {
+      "id": "jane-assigned-vuln-mgmt-remediation",
       "type": "assignment",
-      "from": ["jane-smith"],
-      "to": ["vuln-mgmt-program-poa"],
+      "from": "jane-smith",
+      "to": "vuln-mgmt-program-remediation",
       "relationship": "assignedTo",
       "assignmentType": "primary",
       "status": "active"

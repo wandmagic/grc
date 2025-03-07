@@ -1,0 +1,75 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Cost Node",
+  "description": "A node representing a cost or financial aspect in a GRC model",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../node.schema.json#/definitions/node"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "cost"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the cost"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the cost"
+        },
+        "amount": {
+          "type": "number",
+          "description": "Amount of the cost"
+        },
+        "currency": {
+          "type": "string",
+          "description": "Currency of the cost (e.g., USD, EUR, GBP)",
+          "default": "USD"
+        },
+        "costType": {
+          "type": "string",
+          "description": "Type of cost",
+          "enum": ["implementation", "maintenance", "operational", "capital", "recurring", "one-time", "other"]
+        },
+        "frequency": {
+          "type": "string",
+          "description": "Frequency of the cost (for recurring costs)",
+          "enum": ["one-time", "daily", "weekly", "monthly", "quarterly", "annually", "as-needed"]
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Start date for the cost"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date",
+          "description": "End date for the cost (if applicable)"
+        },
+        "budgetCategory": {
+          "type": "string",
+          "description": "Budget category for the cost"
+        },
+        "approvedBy": {
+          "type": "string",
+          "description": "ID of the person who approved the cost"
+        },
+        "approvalDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the cost was approved"
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the cost",
+          "enum": ["planned", "approved", "incurred", "paid", "cancelled"]
+        }
+      },
+      "required": ["name", "amount", "costType"]
+    }
+  ],
+  "$id": "cost.schema.json"
+}

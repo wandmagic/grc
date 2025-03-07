@@ -33,6 +33,7 @@ const linkFiles = fs.readdirSync('links');
 const linkRefs = [];
 for (const file of linkFiles) {
   if (file.endsWith('.schema.json')) {
+    console.log("Reading "+file);
     const schema = JSON.parse(fs.readFileSync(path.join('links', file), 'utf8'));
     const typeName = file.replace('.schema.json', '');
     linkSchemas[typeName] = schema;
@@ -51,56 +52,17 @@ console.log('Updated bundle.schema.json with dynamic references');
 // Create a compiled schema
 console.log('Creating compiled schema...');
 
-// Define the node schema definition
-const nodeDefinition = {
-  type: "object",
-  required: ["id", "type"],
-  properties: {
-    id: {
-      type: "string",
-      description: "Unique identifier for the node"
-    },
-    type: {
-      type: "string",
-      description: "Type of the node"
-    }
-  }
-};
+// Extract the node definition from the schema file
+const nodeDefinition = nodeSchema.definitions.node;
 
-// Define the link schema definition
+// Create a modified link definition that doesn't reference node.schema.json
 const linkDefinition = {
-  type: "object",
-  required: ["from", "to", "relationship"],
-  properties: {
-    id: {
-      type: "string",
-      description: "Unique identifier for the link"
-    },
-    type: {
-      type: "string",
-      description: "Type of the link"
-    },
-    from: {
-      type: "array",
-      description: "IDs of the source nodes",
-      items: {
-        type: "string"
-      },
-      minItems: 1
-    },
-    to: {
-      type: "array",
-      description: "IDs of the target nodes",
-      items: {
-        type: "string"
-      },
-      minItems: 1
-    },
-    relationship: {
-      type: "string",
-      description: "Type of relationship between the nodes"
-    }
-  }
+  allOf: [
+    // Replace the $ref to node.schema.json with the actual node schema
+    nodeDefinition,
+    // Include the rest of the link definition
+    linkSchema.definitions.link.allOf[1]
+  ]
 };
 
 const compiledSchema = {

@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Tagging Link",
+  "description": "A link representing a tagging relationship between a tag and another node",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../link.schema.json#/definitions/link"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "tagging"
+        },
+        "relationship": {
+          "const": "tagged-with"
+        },
+        "weight": {
+          "type": "number",
+          "description": "Weight or relevance of the tag to the node (0-1)",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "addedBy": {
+          "type": "string",
+          "description": "ID of the person who added the tag"
+        },
+        "addedDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time when the tag was added"
+        }
+      }
+    }
+  ],
+  "$id": "tagging.schema.json"
+}

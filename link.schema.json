@@ -14,20 +14,12 @@
           "required": ["from", "to", "relationship"],
           "properties": {
             "from": {
-              "type": "array",
-              "description": "IDs of the source nodes",
-              "items": {
-                "type": "string"
-              },
-              "minItems": 1
+              "type": "string",
+              "description": "ID of the source node"
             },
             "to": {
-              "type": "array",
-              "description": "IDs of the target nodes",
-              "items": {
-                "type": "string"
-              },
-              "minItems": 1
+              "type": "string",
+              "description": "ID of the target node"
             },
             "relationship": {
               "type": "string",

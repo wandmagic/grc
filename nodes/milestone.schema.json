@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Milestone Node",
+  "description": "A node representing a milestone in a GRC model",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../node.schema.json#/definitions/node"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "milestone"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the milestone"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the milestone"
+        },
+        "dueDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Due date for the milestone"
+        },
+        "completionDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Actual completion date of the milestone"
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the milestone",
+          "enum": ["planned", "in-progress", "completed", "delayed", "cancelled"]
+        },
+        "priority": {
+          "type": "string",
+          "description": "Priority level of the milestone",
+          "enum": ["low", "medium", "high", "critical"]
+        }
+      },
+      "required": ["name", "status"]
+    }
+  ],
+  "$id": "milestone.schema.json"
+}

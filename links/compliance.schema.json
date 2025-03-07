@@ -15,22 +15,6 @@
         "relationship": {
           "const": "satisfies"
         },
-        "from": {
-          "type": "array",
-          "description": "IDs of the source nodes",
-          "items": {
-            "type": "string"
-          },
-          "minItems": 1
-        },
-        "to": {
-          "type": "array",
-          "description": "IDs of the target nodes",
-          "items": {
-            "type": "string"
-          },
-          "minItems": 1
-        },
         "complianceType": {
           "type": "string",
           "description": "Type of compliance relationship",

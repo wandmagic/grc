@@ -1,0 +1,66 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Remediation Node",
+  "description": "A node representing a remediation action in a GRC model",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../node.schema.json#/definitions/node"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "remediation"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the remediation"
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed description of the remediation"
+        },
+        "status": {
+          "type": "string",
+          "description": "Current status of the remediation",
+          "enum": ["planned", "in-progress", "completed", "delayed", "cancelled"]
+        },
+        "priority": {
+          "type": "string",
+          "description": "Priority level of the remediation",
+          "enum": ["low", "medium", "high", "critical"]
+        },
+        "dueDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Due date for the remediation"
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Start date for the remediation"
+        },
+        "completionDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Actual completion date of the remediation"
+        },
+        "estimatedEffort": {
+          "type": "string",
+          "description": "Estimated effort required to complete the remediation"
+        },
+        "costEstimate": {
+          "type": "number",
+          "description": "Estimated cost to complete the remediation"
+        },
+        "remediationType": {
+          "type": "string",
+          "description": "Type of remediation",
+          "enum": ["technical", "procedural", "administrative", "physical", "other"]
+        }
+      },
+      "required": ["name", "description", "status"]
+    }
+  ],
+  "$id": "remediation.schema.json"
+}

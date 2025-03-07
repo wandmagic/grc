@@ -15,22 +15,6 @@
         "relationship": {
           "const": "references"
         },
-        "from": {
-          "type": "array",
-          "description": "IDs of the source nodes",
-          "items": {
-            "type": "string"
-          },
-          "minItems": 1
-        },
-        "to": {
-          "type": "array",
-          "description": "IDs of the target resource nodes",
-          "items": {
-            "type": "string"
-          },
-          "minItems": 1
-        },
         "context": {
           "type": "string",
           "description": "Optional context or note about the reference"

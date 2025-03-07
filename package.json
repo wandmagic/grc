@@ -6,6 +6,7 @@
   "scripts": {
     "compile": "node scripts/compile-schemas.js",
     "validate": "node scripts/validate-examples.js",
+    "dev":"cd frontend && npm run dev",
     "test": "npm run compile && npm run validate"
   },
   "repository": {
