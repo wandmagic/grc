@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { Box, Typography, Tabs, Tab, AppBar, Toolbar, CssBaseline, ThemeProvider, createTheme, Button } from '@mui/material';
 import DownloadIcon from '@mui/icons-material/Download';
+import DescriptionIcon from '@mui/icons-material/Description';
 import ForceGraph from './components/ForceGraph';
 import NodeForm from './components/NodeForm';
 import LinkForm from './components/LinkForm';
 import BundleDropZone from './components/BundleDropZone';
+import SchemaDocumentation from './components/SchemaDocumentation';
 import { GraphNode, GraphLink, GrcBundle } from './types';
 import { generateId, downloadBundle } from './utils/schemaLoader';
 
@@ -137,6 +139,7 @@ function App() {
               <Tab label="Add Node" />
               <Tab label="Add Link" />
               <Tab label="Import/Export" />
+              <Tab icon={<DescriptionIcon />} label="Documentation" />
             </Tabs>
           </Toolbar>
         </AppBar>
@@ -469,6 +472,7 @@ function App() {
                 </Box>
               </Box>
             )}
+            
           </Box>
           
           {/* Overlay panels for tabs */}
@@ -561,6 +565,11 @@ function App() {
                   </pre>
                 </Box>
               </Box>
+            )}
+            
+            {/* Documentation Tab */}
+            {tabIndex === 4 && (
+              <SchemaDocumentation />
             )}
           </Box>
         </Box>
