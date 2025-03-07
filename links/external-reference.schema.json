@@ -1,0 +1,79 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "External Reference Link",
+  "description": "A link representing an external reference to resources on the internet",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../link.schema.json#/definitions/link"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "external-reference"
+        },
+        "relationship": {
+          "const": "references"
+        },
+        "origin": {
+          "type": "array",
+          "description": "IDs of the source nodes",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "target": {
+          "type": "array",
+          "description": "IDs of the target nodes (optional for external references)",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL of the external resource"
+        },
+        "referenceType": {
+          "type": "string",
+          "description": "Type of external reference",
+          "enum": ["documentation", "standard", "regulation", "article", "tool", "repository", "website", "other"]
+        },
+        "title": {
+          "type": "string",
+          "description": "Title or name of the external resource"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the external resource"
+        },
+        "retrievedDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the external resource was retrieved or referenced"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the external resource, if applicable"
+        },
+        "author": {
+          "type": "string",
+          "description": "Author or organization that created the external resource"
+        },
+        "tags": {
+          "type": "array",
+          "description": "Tags or keywords associated with the external resource",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["url", "referenceType"]
+    }
+  ],
+  "originType": ["*"],
+  "targetType": ["*"],
+  "$id": "external-reference.schema.json"
+}

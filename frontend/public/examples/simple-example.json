@@ -75,24 +75,24 @@
     {
       "id": "john-owns-web-server",
       "type": "ownership",
-      "from": "john-doe",
-      "to": "web-server",
+      "origin": "john-doe",
+      "target": "web-server",
       "relationship": "owns",
       "ownershipType": "primary"
     },
     {
       "id": "john-owns-database-server",
       "type": "ownership",
-      "from": "john-doe",
-      "to": "database-server",
+      "origin": "john-doe",
+      "target": "database-server",
       "relationship": "owns",
       "ownershipType": "primary"
     },
     {
       "id": "john-assigned-sysadmin",
       "type": "assignment",
-      "from": "john-doe",
-      "to": "sys-admin-role",
+      "origin": "john-doe",
+      "target": "sys-admin-role",
       "relationship": "assignedTo",
       "assignmentType": "primary",
       "status": "active"
@@ -100,8 +100,8 @@
     {
       "id": "input-validation-mitigates-sql-injection",
       "type": "mitigation",
-      "from": "input-validation-control",
-      "to": "sql-injection-vuln",
+      "origin": "input-validation-control",
+      "target": "sql-injection-vuln",
       "relationship": "mitigates",
       "mitigationType": "preventive",
       "effectiveness": "effective",
@@ -110,8 +110,8 @@
     {
       "id": "db-implements-input-validation",
       "type": "implementation",
-      "from": "database-server",
-      "to": "input-validation-control",
+      "origin": "database-server",
+      "target": "input-validation-control",
       "relationship": "implements",
       "implementationType": "full",
       "status": "implemented"
@@ -119,8 +119,8 @@
     {
       "id": "sql-injection-owasp-reference",
       "type": "reference",
-      "from": "sql-injection-vuln",
-      "to": "owasp-sql-injection-resource",
+      "origin": "sql-injection-vuln",
+      "target": "owasp-sql-injection-resource",
       "relationship": "references",
       "context": "Reference for understanding and mitigating SQL injection vulnerabilities",
       "relevance": "high"

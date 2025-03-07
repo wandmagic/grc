@@ -65,6 +65,46 @@ const linkDefinition = {
   ]
 };
 
+// Helper function to convert from/to to origin/target in link schemas
+function convertLinkProperties(schema) {
+  // Deep clone the schema to avoid modifying the original
+  const convertedSchema = JSON.parse(JSON.stringify(schema));
+  
+  // If the schema has allOf, process each item
+  if (convertedSchema.allOf && convertedSchema.allOf.length > 0) {
+    convertedSchema.allOf.forEach(item => {
+      if (item.properties) {
+        // Rename from to origin
+        if (item.properties.from) {
+          item.properties.origin = item.properties.from;
+          delete item.properties.from;
+        }
+        
+        // Rename to to target
+        if (item.properties.to) {
+          item.properties.target = item.properties.to;
+          delete item.properties.to;
+        }
+        
+        // Update required properties
+        if (item.required) {
+          const fromIndex = item.required.indexOf('from');
+          if (fromIndex !== -1) {
+            item.required[fromIndex] = 'origin';
+          }
+          
+          const toIndex = item.required.indexOf('to');
+          if (toIndex !== -1) {
+            item.required[toIndex] = 'target';
+          }
+        }
+      }
+    });
+  }
+  
+  return convertedSchema;
+}
+
 const compiledSchema = {
   $schema: "http://json-schema.org/draft-07/schema#",
   title: "GRC Bundle Schema",
@@ -126,7 +166,10 @@ const compiledSchema = {
                 }
               }
               
-              return inlinedSchema;
+              // Convert from/to properties to origin/target
+              const convertedSchema = convertLinkProperties(inlinedSchema);
+              
+              return convertedSchema;
             })
           }
         },
@@ -179,8 +222,24 @@ const compiledSchema = {
   ]
 };
 
-// Write the compiled schema to a file
-console.log('Writing compiled schema...');
-fs.writeFileSync('dist/grc-schema.json', JSON.stringify(compiledSchema, null, 2));
+// Create output directories
+const distDir = 'dist';
+const frontendDistDir = 'frontend/public/dist';
 
-console.log('Schema compilation complete: dist/grc-schema.json');
+if (!fs.existsSync(distDir)) {
+  fs.mkdirSync(distDir, { recursive: true });
+}
+
+if (!fs.existsSync(frontendDistDir)) {
+  fs.mkdirSync(frontendDistDir, { recursive: true });
+}
+
+// Write the compiled schema to files
+console.log('Writing compiled schema...');
+const schemaJson = JSON.stringify(compiledSchema, null, 2);
+fs.writeFileSync(path.join(distDir, 'grc-schema.json'), schemaJson);
+fs.writeFileSync(path.join(frontendDistDir, 'grc-schema.json'), schemaJson);
+
+console.log('Schema compilation complete:');
+console.log(`- ${path.join(distDir, 'grc-schema.json')}`);
+console.log(`- ${path.join(frontendDistDir, 'grc-schema.json')}`);

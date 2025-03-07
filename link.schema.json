@@ -11,15 +11,25 @@
         },
         {
           "type": "object",
-          "required": ["from", "to", "relationship"],
+          "required": ["origin", "target", "relationship"],
           "properties": {
-            "from": {
+            "origin": {
               "type": "string",
               "description": "ID of the source node"
             },
-            "to": {
+            "target": {
               "type": "string",
               "description": "ID of the target node"
+            },
+            "originType": {
+              "type": "string",
+              "description": "Type of the source node",
+              "enum": ["*"]
+            },
+            "targetType": {
+              "type": "string",
+              "description": "Type of the target node",
+              "enum": ["*"]
             },
             "relationship": {
               "type": "string",
@@ -28,19 +38,6 @@
           }
         }
       ]
-    },
-    "nodeTypePattern": {
-      "description": "Helper function to create a pattern that matches specific node types",
-      "type": "object",
-      "properties": {
-        "allowedTypes": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Array of allowed node types"
-        }
-      }
     }
   },
   "$id": "link.schema.json"

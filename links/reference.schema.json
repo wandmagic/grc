@@ -27,5 +27,7 @@
       }
     }
   ],
+  "originType": ["*"],
+  "targetType": ["resource"],
   "$id": "reference.schema.json"
 }

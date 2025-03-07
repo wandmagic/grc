@@ -29,6 +29,16 @@
           "type": "string",
           "format": "date-time",
           "description": "Date and time when the tag was added"
+        },
+        "originType": {
+          "type": "string",
+          "description": "Type of the source node",
+          "enum": ["*"]
+        },
+        "targetType": {
+          "type": "string",
+          "description": "Type of the target node",
+          "enum": ["tag"]
         }
       }
     }

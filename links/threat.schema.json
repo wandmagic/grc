@@ -63,5 +63,7 @@
       "required": ["threatType", "likelihood", "impact"]
     }
   ],
+  "originType": ["threat"],
+  "targetType": ["system-component", "resource", "policy", "control"],
   "$id": "threat-relationship.schema.json"
 }

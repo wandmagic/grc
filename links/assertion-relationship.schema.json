@@ -1,0 +1,62 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Assertion Relationship Link",
+  "description": "A link representing a relationship between an assertion and a control",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../link.schema.json#/definitions/link"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "assertion-relationship"
+        },
+        "relationship": {
+          "const": "asserts"
+        },
+        "assertionType": {
+          "type": "string",
+          "description": "Type of assertion relationship",
+          "enum": ["compliance", "implementation", "verification", "validation", "guidance", "clarification", "interpretation"]
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the assertion relationship",
+          "enum": ["proposed", "accepted", "rejected", "under-review", "superseded"]
+        },
+        "confidence": {
+          "type": "string",
+          "description": "Level of confidence in the assertion",
+          "enum": ["low", "medium", "high", "very-high"]
+        },
+        "createdDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the assertion relationship was created"
+        },
+        "lastReviewedDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the assertion relationship was last reviewed"
+        },
+        "reviewedBy": {
+          "type": "string",
+          "description": "Person or entity that reviewed the assertion relationship"
+        },
+        "evidenceReference": {
+          "type": "string",
+          "description": "Reference to evidence supporting the assertion"
+        },
+        "notes": {
+          "type": "string",
+          "description": "Additional notes about the assertion relationship"
+        }
+      },
+      "required": ["assertionType", "status"]
+    }
+  ],
+  "originType": ["assertion"],
+  "targetType": ["control", "policy", "compliance-requirement"],
+  "$id": "assertion-relationship.schema.json"
+}

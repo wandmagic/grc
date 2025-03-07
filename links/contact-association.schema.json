@@ -48,5 +48,7 @@
       "required": ["associationType"]
     }
   ],
+  "originType": ["person", "role", "system-component", "organization"],
+  "targetType": ["contact-info"],
   "$id": "contact-association.schema.json"
 }

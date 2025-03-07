@@ -28,6 +28,53 @@ const ajv = new Ajv({
 });
 addFormats(ajv);
 
+// Add custom keywords for node type validation
+ajv.addKeyword('originType', {
+  validate: function(schema, data, parentSchema, dataPath, parentData, parentDataProperty, rootData) {
+    // This function will be called for each link
+    if (!rootData || !rootData.nodes) {
+      return true; // Skip validation if no nodes array
+    }
+    
+    const originNodeId = data.origin;
+    if (!originNodeId) {
+      return true; // Skip validation if no origin ID
+    }
+    
+    // Find the origin node
+    const originNode = rootData.nodes.find(node => node.id === originNodeId);
+    if (!originNode) {
+      return true; // Skip validation if node not found
+    }
+    
+    return schema.includes(originNode.type);
+  },
+  errors: true
+});
+
+ajv.addKeyword('targetType', {
+  validate: function(schema, data, parentSchema, dataPath, parentData, parentDataProperty, rootData) {
+    // This function will be called for each link
+    if (!rootData || !rootData.nodes) {
+      return true; // Skip validation if no nodes array
+    }
+    
+    const targetNodeId = data.target;
+    if (!targetNodeId) {
+      return true; // Skip validation if no target ID
+    }
+    
+    // Find the target node
+    const targetNode = rootData.nodes.find(node => node.id === targetNodeId);
+    if (!targetNode) {
+      return true; // Skip validation if node not found
+    }
+    
+    return schema.includes(targetNode.type);
+  },
+  errors: true
+});
+
 // Load the compiled schema
 console.log('Loading compiled schema...');
 let schema;

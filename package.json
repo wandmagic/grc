@@ -6,8 +6,13 @@
   "scripts": {
     "compile": "node scripts/compile-schemas.js",
     "validate": "node scripts/validate-examples.js",
-    "dev":"cd frontend && npm run dev",
-    "test": "npm run compile && npm run validate"
+    "copy-examples": "node scripts/copy-examples.js",
+    "dev": "npm run compile && npm run copy-examples && cd frontend && npm run dev",
+    "build": "npm run compile && npm run copy-examples && cd frontend && npm run build",
+    "postbuild": "touch dist/.nojekyll && cp -r dist/frontend/* dist/ && cp -r dist/frontend/.* dist/ 2>/dev/null || true",
+    "preview": "cd frontend && npm run preview",
+    "test": "npm run compile && npm run validate",
+    "clean": "rm -rf dist frontend/public/dist"
   },
   "repository": {
     "type": "git",
@@ -29,6 +34,16 @@
   "homepage": "https://github.com/user/grc-schema#readme",
   "devDependencies": {
     "ajv": "^8.12.0",
-    "ajv-formats": "^2.1.1"
+    "ajv-formats": "^2.1.1",
+    "glob": "^11.0.1",
+    "json-schema-to-typescript": "^15.0.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2"
+  },
+  "dependencies": {
+    "@automapper/classes": "^8.8.1",
+    "@automapper/core": "^8.8.1",
+    "oscal": "^2.0.7",
+    "reflect-metadata": "^0.1.14"
   }
 }

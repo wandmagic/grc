@@ -51,5 +51,7 @@
       "required": ["responsibilityType", "status"]
     }
   ],
+  "originType": ["person", "role"],
+  "targetType": ["system-component", "control", "policy", "responsibility"],
   "$id": "responsibility-assignment.schema.json"
 }

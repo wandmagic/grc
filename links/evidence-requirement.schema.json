@@ -42,6 +42,16 @@
         "notes": {
           "type": "string",
           "description": "Notes about the evidence requirement"
+        },
+        "originType": {
+          "type": "string",
+          "description": "Type of the source node",
+          "enum": ["compliance-requirement", "control", "policy"]
+        },
+        "targetType": {
+          "type": "string",
+          "description": "Type of the target node",
+          "enum": ["evidence"]
         }
       },
       "required": ["requirementType", "status"]

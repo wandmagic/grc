@@ -35,7 +35,9 @@ const ForceGraph = ({ nodes, links, onNodeClick, onLinkClick }: ForceGraphProps)
       let targetId: string | undefined;
       
       // Handle different ways source/target might be specified
-      if (link.from) {
+      if (link.origin) {
+        sourceId = link.origin;
+      } else if (link.from) {
         sourceId = link.from;
       } else if (typeof link.source === 'string') {
         sourceId = link.source;
@@ -43,7 +45,9 @@ const ForceGraph = ({ nodes, links, onNodeClick, onLinkClick }: ForceGraphProps)
         sourceId = link.source.id;
       }
       
-      if (link.to) {
+      if (link.targetId) {
+        targetId = link.targetId;
+      } else if (link.to) {
         targetId = link.to;
       } else if (typeof link.target === 'string') {
         targetId = link.target;

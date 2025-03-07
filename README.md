@@ -118,8 +118,8 @@ Here's a simple example of a GRC bundle:
       "id": "hPq2EkQsAVXDUbZcRdg6l",
       "type": "ownership",
       "name": "john-owns-server",
-      "from": ["gLm9EkQsAVXDUbZcRdg6k"],
-      "to": ["fkB7EkQsAVXDUbZcRdg6j"],
+      "origin": ["gLm9EkQsAVXDUbZcRdg6k"],
+      "target": ["fkB7EkQsAVXDUbZcRdg6j"],
       "relationship": "owns",
       "ownershipType": "primary"
     }
@@ -182,6 +182,35 @@ This project uses GitHub Actions to automatically compile the schema and create 
 3. Manually triggering the workflow
 
 The compiled schema is included in each release as `grc-schema.json`.
+
+## GitHub Pages
+
+This project includes a web-based visualization tool for GRC models, which is deployed to GitHub Pages. You can access it at:
+
+```
+https://[username].github.io/grc-schema/
+```
+
+### Deployment
+
+The GitHub Pages site is automatically deployed using GitHub Actions when changes are pushed to the main branch. The workflow:
+
+1. Compiles the schemas
+2. Copies the examples
+3. Builds the frontend application
+4. Deploys the built files to GitHub Pages
+
+You can also manually trigger the deployment from the Actions tab in the GitHub repository.
+
+### Local Development
+
+To run the frontend application locally:
+
+```bash
+npm run dev
+```
+
+This will start a development server at `http://localhost:5173/`.
 
 ## Contributing
 

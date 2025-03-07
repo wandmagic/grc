@@ -42,5 +42,7 @@
       "required": ["associationType"]
     }
   ],
+  "originType": ["control", "policy", "compliance-requirement", "system-component"],
+  "targetType": ["framework"],
   "$id": "framework-association.schema.json"
 }

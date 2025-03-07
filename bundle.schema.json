@@ -18,6 +18,9 @@
           "items": {
             "oneOf": [
               {
+                "$ref": "nodes/assertion.schema.json"
+              },
+              {
                 "$ref": "nodes/compliance-requirement.schema.json"
               },
               {
@@ -92,6 +95,9 @@
                 "$ref": "links/affects.schema.json"
               },
               {
+                "$ref": "links/assertion-relationship.schema.json"
+              },
+              {
                 "$ref": "links/assignment.schema.json"
               },
               {
@@ -105,6 +111,9 @@
               },
               {
                 "$ref": "links/evidence-requirement.schema.json"
+              },
+              {
+                "$ref": "links/external-reference.schema.json"
               },
               {
                 "$ref": "links/framework-association.schema.json"

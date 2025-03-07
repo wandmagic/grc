@@ -43,5 +43,7 @@
       "required": ["locationType"]
     }
   ],
+  "originType": ["system-component", "person", "role", "resource", "evidence"],
+  "targetType": ["location"],
   "$id": "located-at.schema.json"
 }

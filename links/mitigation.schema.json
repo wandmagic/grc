@@ -58,5 +58,7 @@
       "required": ["mitigationType", "effectiveness", "status"]
     }
   ],
+  "originType": ["control", "remediation", "policy"],
+  "targetType": ["vulnerability", "risk", "threat"],
   "$id": "mitigation.schema.json"
 }

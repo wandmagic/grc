@@ -39,5 +39,7 @@
       "required": ["associationType"]
     }
   ],
+  "originType": ["system-component", "control", "policy", "plan-of-action-item", "remediation"],
+  "targetType": ["cost"],
   "$id": "cost-association.schema.json"
 }

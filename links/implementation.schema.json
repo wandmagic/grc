@@ -66,5 +66,7 @@
       "required": ["implementationType", "status"]
     }
   ],
+  "originType": ["system-component", "policy", "person", "role"],
+  "targetType": ["control", "policy", "remediation"],
   "$id": "implementation.schema.json"
 }

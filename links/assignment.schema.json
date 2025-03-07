@@ -44,6 +44,16 @@
           "type": "string",
           "description": "Status of the assignment",
           "enum": ["active", "inactive", "pending", "completed"]
+        },
+        "originType": {
+          "type": "string",
+          "description": "Type of the source node",
+          "enum": ["person"]
+        },
+        "targetType": {
+          "type": "string",
+          "description": "Type of the target node",
+          "enum": ["role", "responsibility"]
         }
       },
       "required": ["assignmentType", "status"]

@@ -45,5 +45,7 @@
       "required": ["severity"]
     }
   ],
+  "originType": ["vulnerability", "threat"],
+  "targetType": ["system-component"],
   "$id": "affects.schema.json"
 }

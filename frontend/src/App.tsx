@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, Typography, Tabs, Tab, AppBar, Toolbar, CssBaseline, ThemeProvider, createTheme, Button, Divider } from '@mui/material';
+import { Box, Typography, Tabs, Tab, AppBar, Toolbar, CssBaseline, ThemeProvider, createTheme, Button } from '@mui/material';
 import DownloadIcon from '@mui/icons-material/Download';
 import ForceGraph from './components/ForceGraph';
 import NodeForm from './components/NodeForm';
@@ -53,6 +53,27 @@ const LINK_TYPES = [
   'implementation',
   'reference'
 ];
+
+// Function to get color based on node type
+const getNodeColor = (nodeType: string) => {
+  // Color nodes by type
+  switch (nodeType) {
+    case 'system-component':
+      return '#4285F4'; // Blue
+    case 'person':
+      return '#EA4335'; // Red
+    case 'role':
+      return '#FBBC05'; // Yellow
+    case 'vulnerability':
+      return '#34A853'; // Green
+    case 'control':
+      return '#8F00FF'; // Purple
+    case 'resource':
+      return '#FF6D01'; // Orange
+    default:
+      return '#757575'; // Gray
+  }
+};
 
 function App() {
   const [tabIndex, setTabIndex] = useState(0);
@@ -150,80 +171,302 @@ function App() {
           >
             {selectedNode && (
               <Box>
-                <Typography variant="h6" gutterBottom>
-                  {selectedNode.name || selectedNode.id}
-                </Typography>
-                <Typography variant="subtitle1" color="text.secondary" gutterBottom>
-                  Type: {selectedNode.type}
-                </Typography>
-                <Typography variant="subtitle2" gutterBottom>
-                  ID: {selectedNode.id}
-                </Typography>
-                <Divider sx={{ my: 2 }} />
-                <Typography variant="body2">
-                  Properties:
-                </Typography>
-                <pre style={{ 
-                  fontSize: '0.8rem', 
-                  backgroundColor: '#2a2a2a', 
-                  color: '#e0e0e0',
-                  padding: '0.5rem', 
-                  borderRadius: '4px',
-                  overflow: 'auto',
-                  maxHeight: 'calc(100vh - 250px)'
+                <Box sx={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  mb: 1,
+                  backgroundColor: selectedNode ? getNodeColor(selectedNode.type) : 'primary.dark',
+                  p: 1.5,
+                  borderRadius: 1
                 }}>
-                  {JSON.stringify(
-                    // Filter out 3D graph properties
-                    Object.fromEntries(
-                      Object.entries(selectedNode).filter(([key]) => 
-                        !['x', 'y', 'z', 'vx', 'vy', 'vz', 'fx', 'fy', 'fz', 'index'].includes(key)
-                      )
-                    ), 
-                    null, 
-                    2
-                  )}
-                </pre>
+                  <Typography variant="h6" sx={{ 
+                    flexGrow: 1,
+                    color: '#ffffff',
+                    textShadow: '0px 1px 2px rgba(0,0,0,0.5)'
+                  }}>
+                    {selectedNode.name || selectedNode.id}
+                  </Typography>
+                  <Button 
+                    size="small" 
+                    variant="outlined" 
+                    onClick={() => setSelectedNode(null)}
+                    sx={{ 
+                      minWidth: '32px', 
+                      p: '4px',
+                      color: '#ffffff',
+                      borderColor: 'rgba(255,255,255,0.5)'
+                    }}
+                  >
+                    ×
+                  </Button>
+                </Box>
+                
+                <Box sx={{ 
+                  backgroundColor: 'background.paper', 
+                  borderRadius: 1,
+                  mb: 2,
+                  p: 2
+                }}>
+                  <Box sx={{ display: 'flex', mb: 1 }}>
+                    <Typography variant="body2" sx={{ fontWeight: 'bold', width: '80px' }}>
+                      Type:
+                    </Typography>
+                    <Typography variant="body1" sx={{ 
+                      backgroundColor: selectedNode ? getNodeColor(selectedNode.type) : 'primary.dark',
+                      px: 1,
+                      borderRadius: 1,
+                      fontSize: '0.875rem',
+                      color: '#ffffff',
+                      fontWeight: 'bold',
+                      textShadow: '0px 1px 1px rgba(0,0,0,0.3)'
+                    }}>
+                      {selectedNode.type}
+                    </Typography>
+                  </Box>
+                  
+                  <Box sx={{ display: 'flex' }}>
+                    <Typography variant="body2" sx={{ fontWeight: 'bold', width: '80px' }}>
+                      ID:
+                    </Typography>
+                    <Typography variant="body2" sx={{ fontFamily: 'monospace' }}>
+                      {selectedNode.id}
+                    </Typography>
+                  </Box>
+                </Box>
+                
+                <Typography variant="subtitle2" sx={{ 
+                  mb: 1, 
+                  pl: 1,
+                  borderLeft: '3px solid',
+                  borderColor: selectedNode ? getNodeColor(selectedNode.type) : 'primary.main',
+                  fontWeight: 'bold',
+                  letterSpacing: '0.5px'
+                }}>
+                  Attributes
+                </Typography>
+                
+                <Box sx={{ 
+                  backgroundColor: 'background.paper', 
+                  borderRadius: 1,
+                  p: 1,
+                  mb: 2,
+                  maxHeight: 'calc(100vh - 250px)',
+                  overflow: 'auto'
+                }}>
+                  {Object.entries(selectedNode)
+                    .filter(([key]) => !['x', 'y', 'z', 'vx', 'vy', 'vz', 'fx', 'fy', 'fz', 'index', 'id', 'type', 'name', '__threeObj', '__lineObj', '__arrowObj', 'color', 'val', 'geometry', 'material', 'position', 'rotation', 'scale', 'quaternion', 'matrix', 'matrixWorld', 'matrixAutoUpdate', 'matrixWorldNeedsUpdate'].includes(key))
+                    .map(([key, value]) => (
+                      <Box key={key} sx={{ 
+                        mb: 1.5,
+                        p: 1,
+                        backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                        borderRadius: 1,
+                        '&:hover': {
+                          backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                        },
+                        border: '1px solid rgba(255, 255, 255, 0.05)'
+                      }}>
+                        <Typography variant="body2" sx={{ 
+                          color: selectedNode ? getNodeColor(selectedNode.type) : 'primary.light',
+                          fontWeight: 'bold',
+                          mb: 0.5,
+                          textShadow: '0px 1px 1px rgba(0,0,0,0.2)'
+                        }}>
+                          {key}
+                        </Typography>
+                        
+                        {typeof value === 'object' && value !== null ? (
+                          <Box sx={{ 
+                            backgroundColor: 'rgba(0, 0, 0, 0.2)',
+                            p: 1,
+                            borderRadius: 1,
+                            fontFamily: 'monospace',
+                            fontSize: '0.75rem',
+                            maxHeight: '150px',
+                            overflow: 'auto'
+                          }}>
+                            <pre style={{ margin: 0 }}>
+                              {JSON.stringify(value, null, 2)}
+                            </pre>
+                          </Box>
+                        ) : (
+                          <Typography variant="body2" sx={{ 
+                            wordBreak: 'break-word',
+                            fontFamily: typeof value === 'string' && value.length > 30 ? 'monospace' : 'inherit',
+                            fontSize: typeof value === 'string' && value.length > 30 ? '0.75rem' : 'inherit',
+                            color: '#ffffff'
+                          }}>
+                            {value?.toString()}
+                          </Typography>
+                        )}
+                      </Box>
+                    ))}
+                    
+                  {Object.entries(selectedNode)
+                    .filter(([key]) => !['x', 'y', 'z', 'vx', 'vy', 'vz', 'fx', 'fy', 'fz', 'index', 'id', 'type', 'name', '__threeObj', '__lineObj', '__arrowObj', 'color', 'val', 'geometry', 'material', 'position', 'rotation', 'scale', 'quaternion', 'matrix', 'matrixWorld', 'matrixAutoUpdate', 'matrixWorldNeedsUpdate'].includes(key))
+                    .length === 0 && (
+                      <Typography variant="body2" sx={{ color: 'text.secondary', p: 1 }}>
+                        No additional attributes found.
+                      </Typography>
+                    )}
+                </Box>
               </Box>
             )}
             
             {selectedLink && !selectedNode && (
               <Box>
-                <Typography variant="h6" gutterBottom>
-                  {selectedLink.name || selectedLink.id}
-                </Typography>
-                <Typography variant="subtitle1" color="text.secondary" gutterBottom>
-                  Type: {selectedLink.type}
-                </Typography>
-                <Typography variant="subtitle2" gutterBottom>
-                  From: {selectedLink.from}
-                </Typography>
-                <Typography variant="subtitle2" gutterBottom>
-                  To: {selectedLink.to}
-                </Typography>
-                <Divider sx={{ my: 2 }} />
-                <Typography variant="body2">
-                  Properties:
-                </Typography>
-                <pre style={{ 
-                  fontSize: '0.8rem', 
-                  backgroundColor: '#2a2a2a', 
-                  color: '#e0e0e0',
-                  padding: '0.5rem', 
-                  borderRadius: '4px',
-                  overflow: 'auto',
-                  maxHeight: 'calc(100vh - 250px)'
+                <Box sx={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  mb: 1,
+                  backgroundColor: '#757575', // Default gray for links
+                  p: 1.5,
+                  borderRadius: 1
                 }}>
-                  {JSON.stringify(
-                    // Filter out 3D graph properties
-                    Object.fromEntries(
-                      Object.entries(selectedLink).filter(([key]) => 
-                        !['x', 'y', 'z', 'vx', 'vy', 'vz', 'fx', 'fy', 'fz', 'index', 'source', 'target'].includes(key)
-                      )
-                    ), 
-                    null, 
-                    2
-                  )}
-                </pre>
+                  <Typography variant="h6" sx={{ 
+                    flexGrow: 1,
+                    color: '#ffffff',
+                    textShadow: '0px 1px 2px rgba(0,0,0,0.5)'
+                  }}>
+                    {selectedLink.name || selectedLink.id}
+                  </Typography>
+                  <Button 
+                    size="small" 
+                    variant="outlined" 
+                    onClick={() => setSelectedLink(null)}
+                    sx={{ 
+                      minWidth: '32px', 
+                      p: '4px',
+                      color: '#ffffff',
+                      borderColor: 'rgba(255,255,255,0.5)'
+                    }}
+                  >
+                    ×
+                  </Button>
+                </Box>
+                
+                <Box sx={{ 
+                  backgroundColor: 'background.paper', 
+                  borderRadius: 1,
+                  mb: 2,
+                  p: 2
+                }}>
+                  <Box sx={{ display: 'flex', mb: 1 }}>
+                    <Typography variant="body2" sx={{ fontWeight: 'bold', width: '80px' }}>
+                      Type:
+                    </Typography>
+                    <Typography variant="body1" sx={{ 
+                      backgroundColor: '#757575', // Default gray for links
+                      px: 1,
+                      borderRadius: 1,
+                      fontSize: '0.875rem',
+                      color: '#ffffff',
+                      fontWeight: 'bold',
+                      textShadow: '0px 1px 1px rgba(0,0,0,0.3)'
+                    }}>
+                      {selectedLink.type}
+                    </Typography>
+                  </Box>
+                  
+                  <Box sx={{ display: 'flex', mb: 1 }}>
+                    <Typography variant="body2" sx={{ fontWeight: 'bold', width: '80px' }}>
+                      From:
+                    </Typography>
+                    <Typography variant="body2" sx={{ fontFamily: 'monospace' }}>
+                      {selectedLink.from || selectedLink.origin || 
+                        (typeof selectedLink.source === 'string' ? selectedLink.source : 
+                          selectedLink.source?.id)}
+                    </Typography>
+                  </Box>
+                  
+                  <Box sx={{ display: 'flex' }}>
+                    <Typography variant="body2" sx={{ fontWeight: 'bold', width: '80px' }}>
+                      To:
+                    </Typography>
+                    <Typography variant="body2" sx={{ fontFamily: 'monospace' }}>
+                      {selectedLink.to || selectedLink.targetId || 
+                        (typeof selectedLink.target === 'string' ? selectedLink.target : 
+                          selectedLink.target?.id)}
+                    </Typography>
+                  </Box>
+                </Box>
+                
+                <Typography variant="subtitle2" sx={{ 
+                  mb: 1, 
+                  pl: 1,
+                  borderLeft: '3px solid',
+                  borderColor: '#757575', // Default gray for links
+                  fontWeight: 'bold',
+                  letterSpacing: '0.5px'
+                }}>
+                  Attributes
+                </Typography>
+                
+                <Box sx={{ 
+                  backgroundColor: 'background.paper', 
+                  borderRadius: 1,
+                  p: 1,
+                  mb: 2,
+                  maxHeight: 'calc(100vh - 300px)',
+                  overflow: 'auto'
+                }}>
+                  {Object.entries(selectedLink)
+                    .filter(([key]) => !['x', 'y', 'z', 'vx', 'vy', 'vz', 'fx', 'fy', 'fz', 'index', 'source', 'target', 'id', 'type', 'name', 'from', 'to', 'origin', 'targetId', '__threeObj', '__lineObj', '__arrowObj', 'color', 'val', 'curvature', 'rotation', 'geometry', 'material', 'position', 'scale', 'quaternion', 'matrix', 'matrixWorld', 'matrixAutoUpdate', 'matrixWorldNeedsUpdate'].includes(key))
+                    .map(([key, value]) => (
+                      <Box key={key} sx={{ 
+                        mb: 1.5,
+                        p: 1,
+                        backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                        borderRadius: 1,
+                        '&:hover': {
+                          backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                        },
+                        border: '1px solid rgba(255, 255, 255, 0.05)'
+                      }}>
+                        <Typography variant="body2" sx={{ 
+                          color: '#c0c0c0', // Lighter gray for link attributes
+                          fontWeight: 'bold',
+                          mb: 0.5,
+                          textShadow: '0px 1px 1px rgba(0,0,0,0.2)'
+                        }}>
+                          {key}
+                        </Typography>
+                        
+                        {typeof value === 'object' && value !== null ? (
+                          <Box sx={{ 
+                            backgroundColor: 'rgba(0, 0, 0, 0.2)',
+                            p: 1,
+                            borderRadius: 1,
+                            fontFamily: 'monospace',
+                            fontSize: '0.75rem',
+                            maxHeight: '150px',
+                            overflow: 'auto'
+                          }}>
+                            <pre style={{ margin: 0 }}>
+                              {JSON.stringify(value, null, 2)}
+                            </pre>
+                          </Box>
+                        ) : (
+                          <Typography variant="body2" sx={{ 
+                            wordBreak: 'break-word',
+                            fontFamily: typeof value === 'string' && value.length > 30 ? 'monospace' : 'inherit',
+                            fontSize: typeof value === 'string' && value.length > 30 ? '0.75rem' : 'inherit',
+                            color: '#ffffff'
+                          }}>
+                            {value?.toString()}
+                          </Typography>
+                        )}
+                      </Box>
+                    ))}
+                    
+                  {Object.entries(selectedLink)
+                    .filter(([key]) => !['x', 'y', 'z', 'vx', 'vy', 'vz', 'fx', 'fy', 'fz', 'index', 'source', 'target', 'id', 'type', 'name', 'from', 'to', 'origin', 'targetId', '__threeObj', '__lineObj', '__arrowObj', 'color', 'val', 'curvature', 'rotation', 'geometry', 'material', 'position', 'scale', 'quaternion', 'matrix', 'matrixWorld', 'matrixAutoUpdate', 'matrixWorldNeedsUpdate'].includes(key))
+                    .length === 0 && (
+                      <Typography variant="body2" sx={{ color: 'text.secondary', p: 1 }}>
+                        No additional attributes found.
+                      </Typography>
+                    )}
+                </Box>
               </Box>
             )}
           </Box>

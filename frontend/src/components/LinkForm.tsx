@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button, Typography, Paper, TextField, MenuItem, Select, FormControl, InputLabel, Stack } from '@mui/material';
 import { GraphLink, GraphNode } from '../types';
-import { generateId } from '../utils/schemaLoader';
+import { generateId, loadLinkSchema, getAllowedOriginTypes, getAllowedTargetTypes } from '../utils/schemaLoader';
 
 interface LinkFormProps {
   onSubmit: (formData: GraphLink) => void;
@@ -15,6 +15,42 @@ const LinkForm = ({ onSubmit, linkTypes, nodes }: LinkFormProps) => {
   const [sourceNodeId, setSourceNodeId] = useState<string>('');
   const [targetNodeId, setTargetNodeId] = useState<string>('');
   const [relationship, setRelationship] = useState<string>('');
+  const [allowedOriginTypes, setAllowedOriginTypes] = useState<string[]>(['*']);
+  const [allowedTargetTypes, setAllowedTargetTypes] = useState<string[]>(['*']);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  // Load the schema for the selected link type
+  useEffect(() => {
+    if (!selectedType) {
+      setAllowedOriginTypes(['*']);
+      setAllowedTargetTypes(['*']);
+      return;
+    }
+
+    setLoading(true);
+    loadLinkSchema(selectedType)
+      .then((schema) => {
+        setAllowedOriginTypes(getAllowedOriginTypes(schema));
+        setAllowedTargetTypes(getAllowedTargetTypes(schema));
+      })
+      .catch((error) => {
+        console.error(`Error loading schema for ${selectedType}:`, error);
+        setAllowedOriginTypes(['*']);
+        setAllowedTargetTypes(['*']);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [selectedType]);
+
+  // Reset source and target node selections when allowed types change
+  useEffect(() => {
+    setSourceNodeId('');
+  }, [allowedOriginTypes]);
+
+  useEffect(() => {
+    setTargetNodeId('');
+  }, [allowedTargetTypes]);
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -25,8 +61,8 @@ const LinkForm = ({ onSubmit, linkTypes, nodes }: LinkFormProps) => {
       id: generateId(),
       type: selectedType,
       name: linkName || undefined,
-      from: sourceNodeId,
-      to: targetNodeId,
+      origin: sourceNodeId,
+      targetId: targetNodeId,
       relationship: relationship || undefined
     };
     
@@ -38,6 +74,21 @@ const LinkForm = ({ onSubmit, linkTypes, nodes }: LinkFormProps) => {
     setSourceNodeId('');
     setTargetNodeId('');
     setRelationship('');
+  };
+
+  // Filter nodes based on allowed types
+  const getFilteredSourceNodes = () => {
+    if (allowedOriginTypes.includes('*')) {
+      return nodes;
+    }
+    return nodes.filter(node => allowedOriginTypes.includes(node.type));
+  };
+
+  const getFilteredTargetNodes = () => {
+    if (allowedTargetTypes.includes('*')) {
+      return nodes;
+    }
+    return nodes.filter(node => allowedTargetTypes.includes(node.type));
   };
 
   return (
@@ -81,13 +132,19 @@ const LinkForm = ({ onSubmit, linkTypes, nodes }: LinkFormProps) => {
               label="Source Node"
               onChange={(e) => setSourceNodeId(e.target.value)}
               required
+              disabled={loading}
             >
-              {nodes.map((node) => (
+              {getFilteredSourceNodes().map((node) => (
                 <MenuItem key={node.id} value={node.id}>
                   {node.name || node.id} ({node.type})
                 </MenuItem>
               ))}
             </Select>
+            <Typography variant="caption" color="text.secondary" sx={{ mt: 1 }}>
+              {allowedOriginTypes.includes('*') 
+                ? 'Any node type allowed' 
+                : `Allowed types: ${allowedOriginTypes.join(', ')}`}
+            </Typography>
           </FormControl>
           
           <FormControl fullWidth>
@@ -98,13 +155,19 @@ const LinkForm = ({ onSubmit, linkTypes, nodes }: LinkFormProps) => {
               label="Target Node"
               onChange={(e) => setTargetNodeId(e.target.value)}
               required
+              disabled={loading}
             >
-              {nodes.map((node) => (
+              {getFilteredTargetNodes().map((node) => (
                 <MenuItem key={node.id} value={node.id}>
                   {node.name || node.id} ({node.type})
                 </MenuItem>
               ))}
             </Select>
+            <Typography variant="caption" color="text.secondary" sx={{ mt: 1 }}>
+              {allowedTargetTypes.includes('*') 
+                ? 'Any node type allowed' 
+                : `Allowed types: ${allowedTargetTypes.join(', ')}`}
+            </Typography>
           </FormControl>
           
           <TextField
@@ -119,7 +182,7 @@ const LinkForm = ({ onSubmit, linkTypes, nodes }: LinkFormProps) => {
             type="submit" 
             variant="contained" 
             color="primary"
-            disabled={!selectedType || !sourceNodeId || !targetNodeId}
+            disabled={!selectedType || !sourceNodeId || !targetNodeId || loading}
           >
             Add Link
           </Button>

@@ -1,0 +1,89 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Assertion Node",
+  "description": "A node representing an assertion in a GRC model, which can include guidance and statements related to controls",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../node.schema.json#/definitions/node"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "assertion"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the assertion"
+        },
+        "description": {
+          "type": "string",
+          "description": "General description of the assertion"
+        },
+        "statement": {
+          "type": "string",
+          "description": "The main statement or claim being asserted"
+        },
+        "guidance": {
+          "type": "string",
+          "description": "Guidance or instructions related to the assertion"
+        },
+        "source": {
+          "type": "string",
+          "description": "Source or origin of the assertion (e.g., standard, regulation, policy)"
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the assertion",
+          "enum": ["draft", "active", "deprecated", "superseded"]
+        },
+        "createdDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the assertion was created"
+        },
+        "lastReviewedDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the assertion was last reviewed"
+        },
+        "reviewCycle": {
+          "type": "string",
+          "description": "How often the assertion should be reviewed",
+          "enum": ["monthly", "quarterly", "semi-annually", "annually", "as-needed"]
+        },
+        "tags": {
+          "type": "array",
+          "description": "Tags or keywords associated with the assertion",
+          "items": {
+            "type": "string"
+          }
+        },
+        "parts": {
+          "type": "array",
+          "description": "Additional structured parts of the assertion",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Identifier for the part"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the part"
+              },
+              "content": {
+                "type": "string",
+                "description": "Content of the part"
+              }
+            },
+            "required": ["name", "content"]
+          }
+        }
+      },
+      "required": ["name", "statement"]
+    }
+  ],
+  "$id": "assertion.schema.json"
+}

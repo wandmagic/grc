@@ -33,5 +33,7 @@
       "required": ["associationType"]
     }
   ],
+  "originType": ["plan-of-action-item", "remediation", "risk", "vulnerability"],
+  "targetType": ["milestone"],
   "$id": "milestone-association.schema.json"
 }

@@ -42,5 +42,7 @@
       "required": ["ownershipType"]
     }
   ],
+  "originType": ["person", "role", "organization"],
+  "targetType": ["system-component", "policy", "control", "risk", "vulnerability", "threat", "remediation"],
   "$id": "ownership.schema.json"
 }

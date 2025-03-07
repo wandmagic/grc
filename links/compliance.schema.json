@@ -56,5 +56,7 @@
       "required": ["complianceType", "status"]
     }
   ],
+  "originType": ["system-component", "control", "policy"],
+  "targetType": ["compliance-requirement", "framework"],
   "$id": "compliance.schema.json"
 }
