@@ -58,6 +58,17 @@
       "category": "preventive",
       "implementation": "technical",
       "status": "implemented"
+    },
+    {
+      "id": "owasp-sql-injection-resource",
+      "type": "resource",
+      "name": "OWASP SQL Injection Guide",
+      "description": "Comprehensive guide to SQL injection vulnerabilities and prevention techniques",
+      "url": "https://owasp.org/www-community/attacks/SQL_Injection",
+      "resourceType": "documentation",
+      "retrievedDate": "2025-03-06",
+      "author": "OWASP Foundation",
+      "tags": ["security", "vulnerability", "web-security", "database"]
     }
   ],
   "links": [
@@ -96,6 +107,15 @@
       "relationship": "implements",
       "implementationType": "full",
       "status": "implemented"
+    },
+    {
+      "id": "sql-injection-owasp-reference",
+      "type": "reference",
+      "from": ["sql-injection-vuln"],
+      "to": ["owasp-sql-injection-resource"],
+      "relationship": "references",
+      "context": "Reference for understanding and mitigating SQL injection vulnerabilities",
+      "relevance": "high"
     }
   ],
   "metadata": {

@@ -33,6 +33,9 @@
                 "$ref": "nodes/policy.schema.json"
               },
               {
+                "$ref": "nodes/resource.schema.json"
+              },
+              {
                 "$ref": "nodes/responsibility.schema.json"
               },
               {
@@ -75,6 +78,9 @@
               },
               {
                 "$ref": "links/ownership.schema.json"
+              },
+              {
+                "$ref": "links/reference.schema.json"
               },
               {
                 "$ref": "links/responsibility.schema.json"

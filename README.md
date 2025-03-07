@@ -40,6 +40,11 @@ The following node types are defined:
 - `control`: Security or compliance controls
 - `compliance-requirement`: Requirements from standards or regulations
 - `vulnerability`: Identified vulnerabilities
+- `resource`: External resources such as documentation, standards, or articles
+
+### Node IDs
+
+Node IDs are flexible and can be any string. We recommend using descriptive IDs that reflect the entity they represent (e.g., "john-doe" for a person, "web-server" for a system component).
 
 ### Link Types
 
@@ -52,6 +57,7 @@ The following link types are defined:
 - `compliance`: Represents compliance relationships (e.g., control satisfies requirement)
 - `threat`: Represents threat relationships (e.g., threat targets system-component)
 - `implementation`: Represents implementation relationships (e.g., system-component implements control)
+- `reference`: Represents lightweight references to resource nodes
 
 ### Bundle
 
@@ -89,14 +95,14 @@ Here's a simple example of a GRC bundle:
   "type": "bundle",
   "nodes": [
     {
-      "id": "system-component-1",
+      "id": "web-server",
       "type": "system-component",
       "name": "Web Server",
       "description": "Main web server",
       "category": "software"
     },
     {
-      "id": "person-1",
+      "id": "john-doe",
       "type": "person",
       "firstName": "John",
       "lastName": "Doe",
@@ -105,10 +111,10 @@ Here's a simple example of a GRC bundle:
   ],
   "links": [
     {
-      "id": "ownership-1",
+      "id": "john-owns-server",
       "type": "ownership",
-      "from": ["person-1"],
-      "to": ["system-component-1"],
+      "from": ["john-doe"],
+      "to": ["web-server"],
       "relationship": "owns",
       "ownershipType": "primary"
     }
@@ -142,7 +148,7 @@ To compile all schema files into a single schema:
 npm run compile
 ```
 
-This will generate `dist/grc-schema.json`.
+This will gen erate `dist/grc-schema.json`.
 
 ### Validating the Schema and Examples
 

@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Reference Link",
+  "description": "A link representing a reference to a resource node",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../link.schema.json#/definitions/link"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "reference"
+        },
+        "relationship": {
+          "const": "references"
+        },
+        "from": {
+          "type": "array",
+          "description": "IDs of the source nodes",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "to": {
+          "type": "array",
+          "description": "IDs of the target resource nodes",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "context": {
+          "type": "string",
+          "description": "Optional context or note about the reference"
+        },
+        "relevance": {
+          "type": "string",
+          "description": "Relevance of the reference",
+          "enum": ["high", "medium", "low"]
+        }
+      }
+    }
+  ],
+  "$id": "reference.schema.json"
+}

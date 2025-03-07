@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Resource Node",
+  "description": "A node representing an external resource such as documentation, standards, or articles",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "../node.schema.json#/definitions/node"
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "resource"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name or title of the resource"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the resource"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL of the resource"
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "Type of resource",
+          "enum": ["documentation", "standard", "regulation", "article", "tool", "repository", "website", "other"]
+        },
+        "retrievedDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the resource was retrieved or referenced"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the resource, if applicable"
+        },
+        "author": {
+          "type": "string",
+          "description": "Author or organization that created the resource"
+        },
+        "tags": {
+          "type": "array",
+          "description": "Tags or keywords associated with the resource",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["name", "url", "resourceType"]
+    }
+  ],
+  "$id": "resource.schema.json"
+}
