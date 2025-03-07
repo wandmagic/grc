@@ -198,6 +198,7 @@ The GitHub Pages site is automatically deployed using GitHub Actions when change
 1. Compiles the schemas
 2. Copies the examples
 3. Builds the frontend application (using --legacy-peer-deps to handle dependency conflicts)
+   - The frontend is configured with a base path of '/grc/' to handle deployment to a subdirectory
 4. Copies the frontend files to the root of the dist directory
 5. Deploys the dist directory to GitHub Pages
 
