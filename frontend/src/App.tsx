@@ -30,7 +30,7 @@ const theme = createTheme({
 // Node types from the schema
 const NODE_TYPES = [
   'system-component',
-  'sbom-attestation',
+  'attestation',
   'person',
   'role',
   'responsibility',
@@ -91,6 +91,7 @@ function App() {
   });
   const [selectedNode, setSelectedNode] = useState<GraphNode | null>(null);
   const [selectedLink, setSelectedLink] = useState<GraphLink | null>(null);
+  const [nodeRelationships, setNodeRelationships] = useState<GraphLink[]>([]);
 
   // Auto-load the risk example on first run
   useEffect(() => {
@@ -136,11 +137,36 @@ function App() {
   const handleNodeClick = (node: GraphNode) => {
     setSelectedNode(node);
     console.log('Node clicked:', node);
+    
+    // Find all relationships connected to this node
+    const relationships = bundle.links.filter(link => {
+      const sourceId = link.from || link.origin || 
+        (typeof link.source === 'string' ? link.source : 
+          link.source?.id);
+      
+      const targetId = link.to || link.targetId || 
+        (typeof link.target === 'string' ? link.target : 
+          link.target?.id);
+      
+      return sourceId === node.id || targetId === node.id;
+    });
+    
+    setNodeRelationships(relationships);
+    setSelectedLink(null); // Clear any selected link
   };
 
   const handleLinkClick = (link: GraphLink) => {
     setSelectedLink(link);
     console.log('Link clicked:', link);
+    
+    // If a node is selected, keep the relationships visible
+    if (!selectedNode) {
+      setNodeRelationships([]);
+    }
+  };
+  
+  const handleRelationshipClick = (relationship: GraphLink) => {
+    setSelectedLink(relationship);
   };
 
   return (
@@ -182,9 +208,9 @@ function App() {
               top: 0,
               left: 0,
               width: selectedNode || selectedLink ? '300px' : '0px',
-              height: '100%',
+              height: selectedNode || selectedLink ? 'calc(100% - 150px)' : '100%', // Make room for bottom bar
               backgroundColor: 'rgba(30, 30, 30, 0.9)',
-              transition: 'width 0.3s ease',
+              transition: 'width 0.3s ease, height 0.3s ease',
               overflow: 'auto',
               boxShadow: 3,
               zIndex: 1100,
@@ -222,6 +248,128 @@ function App() {
                     ×
                   </Button>
                 </Box>
+          
+          {/* Bottom bar for relationships */}
+          <Box 
+            sx={{ 
+              position: 'absolute',
+              bottom: 0,
+              left: 0,
+              width: '100%',
+              height: selectedNode ? '150px' : '0px',
+              backgroundColor: 'rgba(30, 30, 30, 0.9)',
+              transition: 'height 0.3s ease',
+              overflow: 'auto',
+              boxShadow: 3,
+              zIndex: 1050,
+              p: selectedNode ? 2 : 0,
+              display: 'flex',
+              flexDirection: 'column'
+            }}
+          >
+            {selectedNode && (
+              <>
+                <Typography variant="subtitle1" sx={{ 
+                  mb: 1, 
+                  color: '#ffffff',
+                  fontWeight: 'bold'
+                }}>
+                  Relationships for {selectedNode.name || selectedNode.id}
+                </Typography>
+                
+                <Box sx={{ 
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  gap: 1,
+                  overflowX: 'auto',
+                  pb: 1
+                }}>
+                  {nodeRelationships.length > 0 ? (
+                    nodeRelationships.map(relationship => {
+                      // Determine if this node is the source or target
+                      const sourceId = relationship.from || relationship.origin || 
+                        (typeof relationship.source === 'string' ? relationship.source : 
+                          relationship.source?.id);
+                      
+                      const targetId = relationship.to || relationship.targetId || 
+                        (typeof relationship.target === 'string' ? relationship.target : 
+                          relationship.target?.id);
+                      
+                      const isSource = sourceId === selectedNode.id;
+                      const otherNodeId = isSource ? targetId : sourceId;
+                      const otherNode = bundle.nodes.find(node => node.id === otherNodeId);
+                      const direction = isSource ? 'to' : 'from';
+                      
+                      // Get color based on relationship type
+                      let color = '#757575';
+                      switch (relationship.type) {
+                        case 'ownership':
+                          color = '#4285F4'; // Blue
+                          break;
+                        case 'assignment':
+                          color = '#EA4335'; // Red
+                          break;
+                        case 'responsibility':
+                          color = '#FBBC05'; // Yellow
+                          break;
+                        case 'mitigation':
+                          color = '#34A853'; // Green
+                          break;
+                        case 'compliance':
+                          color = '#8F00FF'; // Purple
+                          break;
+                        case 'threat':
+                          color = '#FF6D01'; // Orange
+                          break;
+                        case 'implementation':
+                          color = '#00BCD4'; // Cyan
+                          break;
+                        case 'reference':
+                          color = '#9E9E9E'; // Gray
+                          break;
+                      }
+                      
+                      return (
+                        <Button
+                          key={relationship.id}
+                          variant={selectedLink && selectedLink.id === relationship.id ? 'contained' : 'outlined'}
+                          size="small"
+                          onClick={() => handleRelationshipClick(relationship)}
+                          sx={{ 
+                            borderColor: color,
+                            color: selectedLink && selectedLink.id === relationship.id ? '#ffffff' : color,
+                            backgroundColor: selectedLink && selectedLink.id === relationship.id ? color : 'transparent',
+                            '&:hover': {
+                              backgroundColor: selectedLink && selectedLink.id === relationship.id ? color : `${color}22`,
+                              borderColor: color
+                            }
+                          }}
+                        >
+                          <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                            <Box 
+                              sx={{ 
+                                width: 10, 
+                                height: 10, 
+                                borderRadius: '50%', 
+                                backgroundColor: color 
+                              }} 
+                            />
+                            <Typography variant="caption">
+                              {relationship.type} {direction} {otherNode ? (otherNode.name || otherNode.id) : otherNodeId}
+                            </Typography>
+                          </Box>
+                        </Button>
+                      );
+                    })
+                  ) : (
+                    <Typography variant="body2" sx={{ color: 'text.secondary', p: 1 }}>
+                      No relationships found for this node.
+                    </Typography>
+                  )}
+                </Box>
+              </>
+            )}
+          </Box>
                 
                 <Box sx={{ 
                   backgroundColor: 'background.paper', 

@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "SBOM Attestation Node",
-  "description": "A node representing a Software Bill of Materials (SBOM) attestation in a GRC model",
+  "title": "Attestation Node",
+  "description": "A node representing an attestation in a GRC model",
   "type": "object",
   "allOf": [
     {
@@ -10,46 +10,46 @@
     {
       "properties": {
         "type": {
-          "const": "sbom-attestation"
+          "const": "attestation"
         },
         "name": {
           "type": "string",
-          "description": "Name of the SBOM attestation"
+          "description": "Name of the attestation"
         },
         "description": {
           "type": "string",
-          "description": "Description of the SBOM attestation"
+          "description": "Description of the attestation"
         },
         "format": {
           "type": "string",
-          "description": "Format of the SBOM (e.g., CycloneDX, SPDX, SWID)",
+          "description": "Format of the attestation (e.g., CycloneDX, SPDX, SWID)",
           "enum": ["CycloneDX", "SPDX", "SWID", "Other"]
         },
         "version": {
           "type": "string",
-          "description": "Version of the SBOM"
+          "description": "Version of the attestation"
         },
         "creationDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Date and time when the SBOM was created"
+          "description": "Date and time when the attestation was created"
         },
         "author": {
           "type": "string",
-          "description": "Author of the SBOM"
+          "description": "Author of the attestation"
         },
         "verificationStatus": {
           "type": "string",
-          "description": "Verification status of the SBOM",
+          "description": "Verification status of the attestation",
           "enum": ["verified", "unverified", "in-progress"]
         },
         "documentLocation": {
           "type": "string",
-          "description": "Location or URI of the SBOM document"
+          "description": "Location or URI of the attestation document"
         }
       },
       "required": ["name", "format"]
     }
   ],
-  "$id": "sbom-attestation.schema.json"
+  "$id": "attestation.schema.json"
 }

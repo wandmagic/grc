@@ -18,6 +18,8 @@ export type GRCBundleSchema = {
    * Collection of nodes in the bundle
    */
   nodes: (
+    | AssertionNode
+    | AttestationNode
     | ComplianceRequirementNode
     | ContactInfoNode
     | ControlNode
@@ -34,7 +36,6 @@ export type GRCBundleSchema = {
     | ResponsibilityNode
     | RiskNode
     | RoleNode
-    | SBOMAttestationNode
     | SystemComponentNode
     | TagNode
     | ThreatNode
@@ -45,11 +46,13 @@ export type GRCBundleSchema = {
    */
   links: (
     | AffectsLink
+    | AssertionRelationshipLink
     | AssignmentLink
     | ComplianceLink
     | ContactAssociationLink
     | CostAssociationLink
     | EvidenceRequirementLink
+    | ExternalReferenceLink
     | FrameworkAssociationLink
     | ImplementationLink
     | LocatedAtLink
@@ -99,6 +102,138 @@ export type GRCBundleSchema = {
     tags?: string[];
     [k: string]: unknown;
   };
+  [k: string]: unknown;
+};
+/**
+ * A node representing an assertion in a GRC model, which can include guidance and statements related to controls
+ */
+export type AssertionNode = {
+  /**
+   * Unique identifier for the node. Recommended to use ShortUUID format (~22 character encoded UUID, e.g., 'keATt6KQsAVXDUbZcRdg6i'). Should be globally unique across all nodes.
+   */
+  id: string;
+  /**
+   * Type of the node
+   */
+  type: string;
+  /**
+   * Optional human-readable name for the node. When migrating from descriptive IDs to ShortUUIDs, the original descriptive ID can be preserved here.
+   */
+  name?: string;
+  [k: string]: unknown;
+} & {
+  type?: 'assertion';
+  /**
+   * Name of the assertion
+   */
+  name: string;
+  /**
+   * General description of the assertion
+   */
+  description?: string;
+  /**
+   * The main statement or claim being asserted
+   */
+  statement: string;
+  /**
+   * Guidance or instructions related to the assertion
+   */
+  guidance?: string;
+  /**
+   * Source or origin of the assertion (e.g., standard, regulation, policy)
+   */
+  source?: string;
+  /**
+   * Status of the assertion
+   */
+  status?: 'draft' | 'active' | 'deprecated' | 'superseded';
+  /**
+   * Date when the assertion was created
+   */
+  createdDate?: string;
+  /**
+   * Date when the assertion was last reviewed
+   */
+  lastReviewedDate?: string;
+  /**
+   * How often the assertion should be reviewed
+   */
+  reviewCycle?: 'monthly' | 'quarterly' | 'semi-annually' | 'annually' | 'as-needed';
+  /**
+   * Tags or keywords associated with the assertion
+   */
+  tags?: string[];
+  /**
+   * Additional structured parts of the assertion
+   */
+  parts?: {
+    /**
+     * Identifier for the part
+     */
+    id?: string;
+    /**
+     * Name of the part
+     */
+    name: string;
+    /**
+     * Content of the part
+     */
+    content: string;
+    [k: string]: unknown;
+  }[];
+  [k: string]: unknown;
+};
+/**
+ * A node representing an attestation in a GRC model
+ */
+export type AttestationNode = {
+  /**
+   * Unique identifier for the node. Recommended to use ShortUUID format (~22 character encoded UUID, e.g., 'keATt6KQsAVXDUbZcRdg6i'). Should be globally unique across all nodes.
+   */
+  id: string;
+  /**
+   * Type of the node
+   */
+  type: string;
+  /**
+   * Optional human-readable name for the node. When migrating from descriptive IDs to ShortUUIDs, the original descriptive ID can be preserved here.
+   */
+  name?: string;
+  [k: string]: unknown;
+} & {
+  type?: 'attestation';
+  /**
+   * Name of the attestation
+   */
+  name: string;
+  /**
+   * Description of the attestation
+   */
+  description?: string;
+  /**
+   * Format of the attestation (e.g., CycloneDX, SPDX, SWID)
+   */
+  format: 'CycloneDX' | 'SPDX' | 'SWID' | 'Other';
+  /**
+   * Version of the attestation
+   */
+  version?: string;
+  /**
+   * Date and time when the attestation was created
+   */
+  creationDate?: string;
+  /**
+   * Author of the attestation
+   */
+  author?: string;
+  /**
+   * Verification status of the attestation
+   */
+  verificationStatus?: 'verified' | 'unverified' | 'in-progress';
+  /**
+   * Location or URI of the attestation document
+   */
+  documentLocation?: string;
   [k: string]: unknown;
 };
 /**
@@ -1119,59 +1254,6 @@ export type RoleNode = {
   [k: string]: unknown;
 };
 /**
- * A node representing a Software Bill of Materials (SBOM) attestation in a GRC model
- */
-export type SBOMAttestationNode = {
-  /**
-   * Unique identifier for the node. Recommended to use ShortUUID format (~22 character encoded UUID, e.g., 'keATt6KQsAVXDUbZcRdg6i'). Should be globally unique across all nodes.
-   */
-  id: string;
-  /**
-   * Type of the node
-   */
-  type: string;
-  /**
-   * Optional human-readable name for the node. When migrating from descriptive IDs to ShortUUIDs, the original descriptive ID can be preserved here.
-   */
-  name?: string;
-  [k: string]: unknown;
-} & {
-  type?: 'sbom-attestation';
-  /**
-   * Name of the SBOM attestation
-   */
-  name: string;
-  /**
-   * Description of the SBOM attestation
-   */
-  description?: string;
-  /**
-   * Format of the SBOM (e.g., CycloneDX, SPDX, SWID)
-   */
-  format: 'CycloneDX' | 'SPDX' | 'SWID' | 'Other';
-  /**
-   * Version of the SBOM
-   */
-  version?: string;
-  /**
-   * Date and time when the SBOM was created
-   */
-  creationDate?: string;
-  /**
-   * Author of the SBOM
-   */
-  author?: string;
-  /**
-   * Verification status of the SBOM
-   */
-  verificationStatus?: 'verified' | 'unverified' | 'in-progress';
-  /**
-   * Location or URI of the SBOM document
-   */
-  documentLocation?: string;
-  [k: string]: unknown;
-};
-/**
  * A node representing a system component in a GRC model
  */
 export type SystemComponentNode = {
@@ -1428,11 +1510,19 @@ export type AffectsLink = ({
   /**
    * ID of the source node
    */
-  from: string;
+  origin: string;
   /**
    * ID of the target node
    */
-  to: string;
+  target: string;
+  /**
+   * Type of the source node
+   */
+  originType?: '*';
+  /**
+   * Type of the target node
+   */
+  targetType?: '*';
   /**
    * Type of relationship between the nodes
    */
@@ -1468,6 +1558,89 @@ export type AffectsLink = ({
   [k: string]: unknown;
 };
 /**
+ * A link representing a relationship between an assertion and a control
+ */
+export type AssertionRelationshipLink = ({
+  /**
+   * Unique identifier for the node. Recommended to use ShortUUID format (~22 character encoded UUID, e.g., 'keATt6KQsAVXDUbZcRdg6i'). Should be globally unique across all nodes.
+   */
+  id: string;
+  /**
+   * Type of the node
+   */
+  type: string;
+  /**
+   * Optional human-readable name for the node. When migrating from descriptive IDs to ShortUUIDs, the original descriptive ID can be preserved here.
+   */
+  name?: string;
+  [k: string]: unknown;
+} & {
+  /**
+   * ID of the source node
+   */
+  origin: string;
+  /**
+   * ID of the target node
+   */
+  target: string;
+  /**
+   * Type of the source node
+   */
+  originType?: '*';
+  /**
+   * Type of the target node
+   */
+  targetType?: '*';
+  /**
+   * Type of relationship between the nodes
+   */
+  relationship: string;
+  [k: string]: unknown;
+}) & {
+  type?: 'assertion-relationship';
+  relationship?: 'asserts';
+  /**
+   * Type of assertion relationship
+   */
+  assertionType:
+    | 'compliance'
+    | 'implementation'
+    | 'verification'
+    | 'validation'
+    | 'guidance'
+    | 'clarification'
+    | 'interpretation';
+  /**
+   * Status of the assertion relationship
+   */
+  status: 'proposed' | 'accepted' | 'rejected' | 'under-review' | 'superseded';
+  /**
+   * Level of confidence in the assertion
+   */
+  confidence?: 'low' | 'medium' | 'high' | 'very-high';
+  /**
+   * Date when the assertion relationship was created
+   */
+  createdDate?: string;
+  /**
+   * Date when the assertion relationship was last reviewed
+   */
+  lastReviewedDate?: string;
+  /**
+   * Person or entity that reviewed the assertion relationship
+   */
+  reviewedBy?: string;
+  /**
+   * Reference to evidence supporting the assertion
+   */
+  evidenceReference?: string;
+  /**
+   * Additional notes about the assertion relationship
+   */
+  notes?: string;
+  [k: string]: unknown;
+};
+/**
  * A link representing an assignment relationship between nodes
  */
 export type AssignmentLink = ({
@@ -1488,11 +1661,19 @@ export type AssignmentLink = ({
   /**
    * ID of the source node
    */
-  from: string;
+  origin: string;
   /**
    * ID of the target node
    */
-  to: string;
+  target: string;
+  /**
+   * Type of the source node
+   */
+  originType?: '*';
+  /**
+   * Type of the target node
+   */
+  targetType?: '*';
   /**
    * Type of relationship between the nodes
    */
@@ -1525,6 +1706,14 @@ export type AssignmentLink = ({
    * Status of the assignment
    */
   status: 'active' | 'inactive' | 'pending' | 'completed';
+  /**
+   * Type of the source node
+   */
+  originType?: 'person';
+  /**
+   * Type of the target node
+   */
+  targetType?: 'role' | 'responsibility';
   [k: string]: unknown;
 };
 /**
@@ -1548,11 +1737,19 @@ export type ComplianceLink = ({
   /**
    * ID of the source node
    */
-  from: string;
+  origin: string;
   /**
    * ID of the target node
    */
-  to: string;
+  target: string;
+  /**
+   * Type of the source node
+   */
+  originType?: '*';
+  /**
+   * Type of the target node
+   */
+  targetType?: '*';
   /**
    * Type of relationship between the nodes
    */
@@ -1622,11 +1819,19 @@ export type ContactAssociationLink = ({
   /**
    * ID of the source node
    */
-  from: string;
+  origin: string;
   /**
    * ID of the target node
    */
-  to: string;
+  target: string;
+  /**
+   * Type of the source node
+   */
+  originType?: '*';
+  /**
+   * Type of the target node
+   */
+  targetType?: '*';
   /**
    * Type of relationship between the nodes
    */
@@ -1682,11 +1887,19 @@ export type CostAssociationLink = ({
   /**
    * ID of the source node
    */
-  from: string;
+  origin: string;
   /**
    * ID of the target node
    */
-  to: string;
+  target: string;
+  /**
+   * Type of the source node
+   */
+  originType?: '*';
+  /**
+   * Type of the target node
+   */
+  targetType?: '*';
   /**
    * Type of relationship between the nodes
    */
@@ -1734,11 +1947,19 @@ export type EvidenceRequirementLink = ({
   /**
    * ID of the source node
    */
-  from: string;
+  origin: string;
   /**
    * ID of the target node
    */
-  to: string;
+  target: string;
+  /**
+   * Type of the source node
+   */
+  originType?: '*';
+  /**
+   * Type of the target node
+   */
+  targetType?: '*';
   /**
    * Type of relationship between the nodes
    */
@@ -1771,6 +1992,100 @@ export type EvidenceRequirementLink = ({
    * Notes about the evidence requirement
    */
   notes?: string;
+  /**
+   * Type of the source node
+   */
+  originType?: 'compliance-requirement' | 'control' | 'policy';
+  /**
+   * Type of the target node
+   */
+  targetType?: 'evidence';
+  [k: string]: unknown;
+};
+/**
+ * A link representing an external reference to resources on the internet
+ */
+export type ExternalReferenceLink = ({
+  /**
+   * Unique identifier for the node. Recommended to use ShortUUID format (~22 character encoded UUID, e.g., 'keATt6KQsAVXDUbZcRdg6i'). Should be globally unique across all nodes.
+   */
+  id: string;
+  /**
+   * Type of the node
+   */
+  type: string;
+  /**
+   * Optional human-readable name for the node. When migrating from descriptive IDs to ShortUUIDs, the original descriptive ID can be preserved here.
+   */
+  name?: string;
+  [k: string]: unknown;
+} & {
+  /**
+   * ID of the source node
+   */
+  origin: string;
+  /**
+   * ID of the target node
+   */
+  target: string;
+  /**
+   * Type of the source node
+   */
+  originType?: '*';
+  /**
+   * Type of the target node
+   */
+  targetType?: '*';
+  /**
+   * Type of relationship between the nodes
+   */
+  relationship: string;
+  [k: string]: unknown;
+}) & {
+  type?: 'external-reference';
+  relationship?: 'references';
+  /**
+   * IDs of the source nodes
+   *
+   * @minItems 1
+   */
+  origin?: [string, ...string[]];
+  /**
+   * IDs of the target nodes (optional for external references)
+   */
+  target?: string[];
+  /**
+   * URL of the external resource
+   */
+  url: string;
+  /**
+   * Type of external reference
+   */
+  referenceType: 'documentation' | 'standard' | 'regulation' | 'article' | 'tool' | 'repository' | 'website' | 'other';
+  /**
+   * Title or name of the external resource
+   */
+  title?: string;
+  /**
+   * Description of the external resource
+   */
+  description?: string;
+  /**
+   * Date when the external resource was retrieved or referenced
+   */
+  retrievedDate?: string;
+  /**
+   * Version of the external resource, if applicable
+   */
+  version?: string;
+  /**
+   * Author or organization that created the external resource
+   */
+  author?: string;
+  /**
+   * Tags or keywords associated with the external resource
+   */
+  tags?: string[];
   [k: string]: unknown;
 };
 /**
@@ -1794,11 +2109,19 @@ export type FrameworkAssociationLink = ({
   /**
    * ID of the source node
    */
-  from: string;
+  origin: string;
   /**
    * ID of the target node
    */
-  to: string;
+  target: string;
+  /**
+   * Type of the source node
+   */
+  originType?: '*';
+  /**
+   * Type of the target node
+   */
+  targetType?: '*';
   /**
    * Type of relationship between the nodes
    */
@@ -1850,11 +2173,19 @@ export type ImplementationLink = ({
   /**
    * ID of the source node
    */
-  from: string;
+  origin: string;
   /**
    * ID of the target node
    */
-  to: string;
+  target: string;
+  /**
+   * Type of the source node
+   */
+  originType?: '*';
+  /**
+   * Type of the target node
+   */
+  targetType?: '*';
   /**
    * Type of relationship between the nodes
    */
@@ -1926,11 +2257,19 @@ export type LocatedAtLink = ({
   /**
    * ID of the source node
    */
-  from: string;
+  origin: string;
   /**
    * ID of the target node
    */
-  to: string;
+  target: string;
+  /**
+   * Type of the source node
+   */
+  originType?: '*';
+  /**
+   * Type of the target node
+   */
+  targetType?: '*';
   /**
    * Type of relationship between the nodes
    */
@@ -1982,11 +2321,19 @@ export type MilestoneAssociationLink = ({
   /**
    * ID of the source node
    */
-  from: string;
+  origin: string;
   /**
    * ID of the target node
    */
-  to: string;
+  target: string;
+  /**
+   * Type of the source node
+   */
+  originType?: '*';
+  /**
+   * Type of the target node
+   */
+  targetType?: '*';
   /**
    * Type of relationship between the nodes
    */
@@ -2030,11 +2377,19 @@ export type MitigationLink = ({
   /**
    * ID of the source node
    */
-  from: string;
+  origin: string;
   /**
    * ID of the target node
    */
-  to: string;
+  target: string;
+  /**
+   * Type of the source node
+   */
+  originType?: '*';
+  /**
+   * Type of the target node
+   */
+  targetType?: '*';
   /**
    * Type of relationship between the nodes
    */
@@ -2098,11 +2453,19 @@ export type OwnershipLink = ({
   /**
    * ID of the source node
    */
-  from: string;
+  origin: string;
   /**
    * ID of the target node
    */
-  to: string;
+  target: string;
+  /**
+   * Type of the source node
+   */
+  originType?: '*';
+  /**
+   * Type of the target node
+   */
+  targetType?: '*';
   /**
    * Type of relationship between the nodes
    */
@@ -2154,11 +2517,19 @@ export type ReferenceLink = ({
   /**
    * ID of the source node
    */
-  from: string;
+  origin: string;
   /**
    * ID of the target node
    */
-  to: string;
+  target: string;
+  /**
+   * Type of the source node
+   */
+  originType?: '*';
+  /**
+   * Type of the target node
+   */
+  targetType?: '*';
   /**
    * Type of relationship between the nodes
    */
@@ -2198,11 +2569,19 @@ export type ResponsibilityLink = ({
   /**
    * ID of the source node
    */
-  from: string;
+  origin: string;
   /**
    * ID of the target node
    */
-  to: string;
+  target: string;
+  /**
+   * Type of the source node
+   */
+  originType?: '*';
+  /**
+   * Type of the target node
+   */
+  targetType?: '*';
   /**
    * Type of relationship between the nodes
    */
@@ -2262,11 +2641,19 @@ export type TaggingLink = ({
   /**
    * ID of the source node
    */
-  from: string;
+  origin: string;
   /**
    * ID of the target node
    */
-  to: string;
+  target: string;
+  /**
+   * Type of the source node
+   */
+  originType?: '*';
+  /**
+   * Type of the target node
+   */
+  targetType?: '*';
   /**
    * Type of relationship between the nodes
    */
@@ -2287,6 +2674,14 @@ export type TaggingLink = ({
    * Date and time when the tag was added
    */
   addedDate?: string;
+  /**
+   * Type of the source node
+   */
+  originType?: '*';
+  /**
+   * Type of the target node
+   */
+  targetType?: 'tag';
   [k: string]: unknown;
 };
 /**
@@ -2310,11 +2705,19 @@ export type ThreatLink = ({
   /**
    * ID of the source node
    */
-  from: string;
+  origin: string;
   /**
    * ID of the target node
    */
-  to: string;
+  target: string;
+  /**
+   * Type of the source node
+   */
+  originType?: '*';
+  /**
+   * Type of the target node
+   */
+  targetType?: '*';
   /**
    * Type of relationship between the nodes
    */

@@ -29,7 +29,7 @@ The schema is organized into three main components:
 The following node types are defined:
 
 - `system-component`: Hardware, software, or network components
-- `sbom-attestation`: Software Bill of Materials attestations
+- `attestation`: Attestations (including Software Bill of Materials)
 - `person`: Individuals involved in GRC activities
 - `role`: Organizational roles
 - `responsibility`: Specific responsibilities

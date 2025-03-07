@@ -21,6 +21,9 @@
                 "$ref": "nodes/assertion.schema.json"
               },
               {
+                "$ref": "nodes/attestation.schema.json"
+              },
+              {
                 "$ref": "nodes/compliance-requirement.schema.json"
               },
               {
@@ -67,9 +70,6 @@
               },
               {
                 "$ref": "nodes/role.schema.json"
-              },
-              {
-                "$ref": "nodes/sbom-attestation.schema.json"
               },
               {
                 "$ref": "nodes/system-component.schema.json"
