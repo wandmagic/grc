@@ -1,10 +1,10 @@
 {
   "$schema": "../dist/grc-schema.json",
-  "id": "bundle-risk-management",
+  "id": "qc2khwaurks",
   "type": "bundle",
   "nodes": [
     {
-      "id": "cloud-infrastructure",
+      "id": "8p5by5g4lg3",
       "type": "system-component",
       "name": "Cloud Infrastructure",
       "description": "AWS cloud infrastructure hosting critical applications",
@@ -13,7 +13,7 @@
       "criticality": "critical"
     },
     {
-      "id": "customer-portal",
+      "id": "im4cxql19dk",
       "type": "system-component",
       "name": "Customer Portal",
       "description": "Web application for customer self-service",
@@ -22,7 +22,7 @@
       "criticality": "high"
     },
     {
-      "id": "internal-network",
+      "id": "kj6rbq5aao8",
       "type": "system-component",
       "name": "Internal Network",
       "description": "Corporate internal network",
@@ -31,7 +31,7 @@
       "criticality": "high"
     },
     {
-      "id": "outdated-tls",
+      "id": "r068mcjps7",
       "type": "vulnerability",
       "name": "Outdated TLS Configuration",
       "description": "TLS 1.0/1.1 still enabled on web servers",
@@ -41,7 +41,7 @@
       "cvssScore": 5.3
     },
     {
-      "id": "weak-password-policy",
+      "id": "x69efi53j7",
       "type": "vulnerability",
       "name": "Weak Password Policy",
       "description": "Password policy does not enforce sufficient complexity",
@@ -51,7 +51,7 @@
       "cvssScore": 7.2
     },
     {
-      "id": "unpatched-systems",
+      "id": "828f9a8ud0t",
       "type": "vulnerability",
       "name": "Unpatched Systems",
       "description": "Several systems missing critical security patches",
@@ -61,7 +61,7 @@
       "cvssScore": 9.1
     },
     {
-      "id": "mitm-attack",
+      "id": "tdkxp5nrpqs",
       "type": "threat",
       "name": "Man-in-the-Middle Attack",
       "description": "Interception of network traffic to steal sensitive data",
@@ -73,7 +73,7 @@
       "likelihood": "possible"
     },
     {
-      "id": "credential-theft",
+      "id": "hyg58z44von",
       "type": "threat",
       "name": "Credential Theft",
       "description": "Theft of user credentials through various means",
@@ -85,7 +85,7 @@
       "likelihood": "likely"
     },
     {
-      "id": "ransomware-attack",
+      "id": "6iqx8l0dox",
       "type": "threat",
       "name": "Ransomware Attack",
       "description": "Encryption of data and systems for ransom",
@@ -97,7 +97,7 @@
       "likelihood": "possible"
     },
     {
-      "id": "data-breach-risk",
+      "id": "379bbz0vqlh",
       "type": "risk",
       "name": "Data Breach",
       "description": "Unauthorized access to sensitive customer data",
@@ -108,7 +108,7 @@
       "status": "mitigated"
     },
     {
-      "id": "service-disruption-risk",
+      "id": "voakyx8ki1",
       "type": "risk",
       "name": "Service Disruption",
       "description": "Disruption of critical business services",
@@ -119,7 +119,7 @@
       "status": "mitigated"
     },
     {
-      "id": "regulatory-noncompliance-risk",
+      "id": "shhfml7epom",
       "type": "risk",
       "name": "Regulatory Non-Compliance",
       "description": "Failure to comply with regulatory requirements",
@@ -130,7 +130,7 @@
       "status": "assessed"
     },
     {
-      "id": "tls-hardening",
+      "id": "o65d0s24m78",
       "type": "control",
       "name": "TLS Configuration Hardening",
       "description": "Disable outdated TLS versions and enforce strong cipher suites",
@@ -141,7 +141,7 @@
       "effectiveness": "effective"
     },
     {
-      "id": "password-policy",
+      "id": "yv5tmfpwelm",
       "type": "control",
       "name": "Strong Password Policy",
       "description": "Enforce strong password requirements and MFA",
@@ -152,7 +152,7 @@
       "effectiveness": "effective"
     },
     {
-      "id": "patch-management",
+      "id": "26yvwa0e6p1",
       "type": "control",
       "name": "Patch Management",
       "description": "Regular patching of all systems",
@@ -163,7 +163,7 @@
       "effectiveness": "effective"
     },
     {
-      "id": "data-encryption",
+      "id": "kjdgg354bu",
       "type": "control",
       "name": "Data Encryption",
       "description": "Encryption of sensitive data in transit and at rest",
@@ -174,7 +174,7 @@
       "effectiveness": "effective"
     },
     {
-      "id": "backup-recovery",
+      "id": "s12aujezn8k",
       "type": "control",
       "name": "Backup and Recovery",
       "description": "Regular backups and tested recovery procedures",
@@ -185,7 +185,7 @@
       "effectiveness": "effective"
     },
     {
-      "id": "implement-mfa",
+      "id": "ltlwi9lo2jq",
       "type": "plan-of-action-item",
       "name": "Implement MFA for All Users",
       "description": "Implement multi-factor authentication for all users",
@@ -196,7 +196,7 @@
       "completionDate": "2024-12-15"
     },
     {
-      "id": "upgrade-tls",
+      "id": "9ljdp9ztdqt",
       "type": "plan-of-action-item",
       "name": "Upgrade TLS Configuration",
       "description": "Upgrade TLS configuration on all web servers",
@@ -207,16 +207,17 @@
       "completionDate": "2024-11-20"
     },
     {
-      "id": "michael-johnson",
+      "id": "rp4or6m7n3j",
       "type": "person",
       "firstName": "Michael",
       "lastName": "Johnson",
       "email": "michael.johnson@example.com",
       "department": "IT Security",
-      "title": "Risk Manager"
+      "title": "Risk Manager",
+      "name": "michael-johnson"
     },
     {
-      "id": "risk-manager-role",
+      "id": "4d72wj4j3d9",
       "type": "role",
       "name": "Risk Manager",
       "description": "Responsible for managing organizational risks",
@@ -226,279 +227,308 @@
   ],
   "links": [
     {
-      "id": "mitm-exploits-outdated-tls",
+      "id": "xemcqx29yjk",
       "type": "threat-relationship",
-      "origin": "mitm-attack",
-      "target": "outdated-tls",
+      "origin": "tdkxp5nrpqs",
+      "target": "r068mcjps7",
       "relationship": "threatens",
       "threatType": "exploits",
       "likelihood": "possible",
-      "impact": "major"
+      "impact": "major",
+      "name": "mitm-exploits-outdated-tls"
     },
     {
-      "id": "credential-theft-exploits-weak-passwords",
+      "id": "fm3wdf3oe5w",
       "type": "threat-relationship",
-      "origin": "credential-theft",
-      "target": "weak-password-policy",
+      "origin": "hyg58z44von",
+      "target": "x69efi53j7",
       "relationship": "threatens",
       "threatType": "exploits",
       "likelihood": "likely",
-      "impact": "major"
+      "impact": "major",
+      "name": "credential-theft-exploits-weak-passwords"
     },
     {
-      "id": "ransomware-exploits-unpatched-systems",
+      "id": "lkgge2wt2e9",
       "type": "threat-relationship",
-      "origin": "ransomware-attack",
-      "target": "unpatched-systems",
+      "origin": "6iqx8l0dox",
+      "target": "828f9a8ud0t",
       "relationship": "threatens",
       "threatType": "exploits",
       "likelihood": "possible",
-      "impact": "severe"
+      "impact": "severe",
+      "name": "ransomware-exploits-unpatched-systems"
     },
     {
-      "id": "mitm-targets-customer-portal",
+      "id": "oqi1522zh7",
       "type": "threat-relationship",
-      "origin": "mitm-attack",
-      "target": "customer-portal",
+      "origin": "tdkxp5nrpqs",
+      "target": "im4cxql19dk",
       "relationship": "threatens",
       "threatType": "targets",
       "likelihood": "possible",
-      "impact": "major"
+      "impact": "major",
+      "name": "mitm-targets-customer-portal"
     },
     {
-      "id": "credential-theft-targets-infrastructure",
+      "id": "u03jl6u46et",
       "type": "threat-relationship",
-      "origin": "credential-theft",
-      "target": "cloud-infrastructure",
+      "origin": "hyg58z44von",
+      "target": "8p5by5g4lg3",
       "relationship": "threatens",
       "threatType": "targets",
       "likelihood": "likely",
-      "impact": "major"
+      "impact": "major",
+      "name": "credential-theft-targets-infrastructure"
     },
     {
-      "id": "credential-theft-targets-portal",
+      "id": "8wq52hk953g",
       "type": "threat-relationship",
-      "origin": "credential-theft",
-      "target": "customer-portal",
+      "origin": "hyg58z44von",
+      "target": "im4cxql19dk",
       "relationship": "threatens",
       "threatType": "targets",
       "likelihood": "likely",
-      "impact": "major"
+      "impact": "major",
+      "name": "credential-theft-targets-portal"
     },
     {
-      "id": "ransomware-targets-cloud-infrastructure",
+      "id": "sqzaw27t2z",
       "type": "threat-relationship",
-      "origin": "ransomware-attack",
-      "target": "cloud-infrastructure",
+      "origin": "6iqx8l0dox",
+      "target": "8p5by5g4lg3",
       "relationship": "threatens",
       "threatType": "targets",
       "likelihood": "possible",
-      "impact": "severe"
+      "impact": "severe",
+      "name": "ransomware-targets-cloud-infrastructure"
     },
     {
-      "id": "ransomware-targets-customer-portal",
+      "id": "vkx6oph56r",
       "type": "threat-relationship",
-      "origin": "ransomware-attack",
-      "target": "customer-portal",
+      "origin": "6iqx8l0dox",
+      "target": "im4cxql19dk",
       "relationship": "threatens",
       "threatType": "targets",
       "likelihood": "possible",
-      "impact": "severe"
+      "impact": "severe",
+      "name": "ransomware-targets-customer-portal"
     },
     {
-      "id": "ransomware-targets-internal-network",
+      "id": "uz79id4pp",
       "type": "threat-relationship",
-      "origin": "ransomware-attack",
-      "target": "internal-network",
+      "origin": "6iqx8l0dox",
+      "target": "kj6rbq5aao8",
       "relationship": "threatens",
       "threatType": "targets",
       "likelihood": "possible",
-      "impact": "severe"
+      "impact": "severe",
+      "name": "ransomware-targets-internal-network"
     },
     {
-      "id": "tls-hardening-mitigates-outdated-tls",
+      "id": "n0o90qbuptm",
       "type": "mitigation",
-      "origin": "tls-hardening",
-      "target": "outdated-tls",
+      "origin": "o65d0s24m78",
+      "target": "r068mcjps7",
       "relationship": "mitigates",
       "mitigationType": "preventive",
       "effectiveness": "effective",
-      "status": "implemented"
+      "status": "implemented",
+      "name": "tls-hardening-mitigates-outdated-tls"
     },
     {
-      "id": "password-policy-mitigates-weak-passwords",
+      "id": "n96rwuq0ej",
       "type": "mitigation",
-      "origin": "password-policy",
-      "target": "weak-password-policy",
+      "origin": "yv5tmfpwelm",
+      "target": "x69efi53j7",
       "relationship": "mitigates",
       "mitigationType": "preventive",
       "effectiveness": "effective",
-      "status": "implemented"
+      "status": "implemented",
+      "name": "password-policy-mitigates-weak-passwords"
     },
     {
-      "id": "patch-management-mitigates-unpatched-systems",
+      "id": "sefe9ua5ai",
       "type": "mitigation",
-      "origin": "patch-management",
-      "target": "unpatched-systems",
+      "origin": "26yvwa0e6p1",
+      "target": "828f9a8ud0t",
       "relationship": "mitigates",
       "mitigationType": "preventive",
       "effectiveness": "effective",
-      "status": "implemented"
+      "status": "implemented",
+      "name": "patch-management-mitigates-unpatched-systems"
     },
     {
-      "id": "data-encryption-mitigates-data-breach",
+      "id": "s35pdf0o9id",
       "type": "mitigation",
-      "origin": "data-encryption",
-      "target": "data-breach-risk",
+      "origin": "kjdgg354bu",
+      "target": "379bbz0vqlh",
       "relationship": "mitigates",
       "mitigationType": "preventive",
       "effectiveness": "effective",
-      "status": "implemented"
+      "status": "implemented",
+      "name": "data-encryption-mitigates-data-breach"
     },
     {
-      "id": "backup-recovery-mitigates-service-disruption",
+      "id": "9726s6j6var",
       "type": "mitigation",
-      "origin": "backup-recovery",
-      "target": "service-disruption-risk",
+      "origin": "s12aujezn8k",
+      "target": "voakyx8ki1",
       "relationship": "mitigates",
       "mitigationType": "recovery",
       "effectiveness": "effective",
-      "status": "implemented"
+      "status": "implemented",
+      "name": "backup-recovery-mitigates-service-disruption"
     },
     {
-      "id": "customer-portal-implements-tls-hardening",
+      "id": "nxrh3k176s",
       "type": "implementation",
-      "origin": "customer-portal",
-      "target": "tls-hardening",
+      "origin": "im4cxql19dk",
+      "target": "o65d0s24m78",
       "relationship": "implements",
       "implementationType": "full",
-      "status": "implemented"
+      "status": "implemented",
+      "name": "customer-portal-implements-tls-hardening"
     },
     {
-      "id": "cloud-infrastructure-implements-password-policy",
+      "id": "32e5kalk76n",
       "type": "implementation",
-      "origin": "cloud-infrastructure",
-      "target": "password-policy",
+      "origin": "8p5by5g4lg3",
+      "target": "yv5tmfpwelm",
       "relationship": "implements",
       "implementationType": "full",
-      "status": "implemented"
+      "status": "implemented",
+      "name": "cloud-infrastructure-implements-password-policy"
     },
     {
-      "id": "customer-portal-implements-password-policy",
+      "id": "fld5q6jyspi",
       "type": "implementation",
-      "origin": "customer-portal",
-      "target": "password-policy",
+      "origin": "im4cxql19dk",
+      "target": "yv5tmfpwelm",
       "relationship": "implements",
       "implementationType": "full",
-      "status": "implemented"
+      "status": "implemented",
+      "name": "customer-portal-implements-password-policy"
     },
     {
-      "id": "cloud-infrastructure-implements-patch-management",
+      "id": "ajkj9n2mrk8",
       "type": "implementation",
-      "origin": "cloud-infrastructure",
-      "target": "patch-management",
+      "origin": "8p5by5g4lg3",
+      "target": "26yvwa0e6p1",
       "relationship": "implements",
       "implementationType": "full",
-      "status": "implemented"
+      "status": "implemented",
+      "name": "cloud-infrastructure-implements-patch-management"
     },
     {
-      "id": "customer-portal-implements-patch-management",
+      "id": "dexd7cv9pqh",
       "type": "implementation",
-      "origin": "customer-portal",
-      "target": "patch-management",
+      "origin": "im4cxql19dk",
+      "target": "26yvwa0e6p1",
       "relationship": "implements",
       "implementationType": "full",
-      "status": "implemented"
+      "status": "implemented",
+      "name": "customer-portal-implements-patch-management"
     },
     {
-      "id": "internal-network-implements-patch-management",
+      "id": "acltiqzwrj4",
       "type": "implementation",
-      "origin": "internal-network",
-      "target": "patch-management",
+      "origin": "kj6rbq5aao8",
+      "target": "26yvwa0e6p1",
       "relationship": "implements",
       "implementationType": "full",
-      "status": "implemented"
+      "status": "implemented",
+      "name": "internal-network-implements-patch-management"
     },
     {
-      "id": "cloud-infrastructure-implements-encryption",
+      "id": "nm3pk3bshf8",
       "type": "implementation",
-      "origin": "cloud-infrastructure",
-      "target": "data-encryption",
+      "origin": "8p5by5g4lg3",
+      "target": "kjdgg354bu",
       "relationship": "implements",
       "implementationType": "full",
-      "status": "implemented"
+      "status": "implemented",
+      "name": "cloud-infrastructure-implements-encryption"
     },
     {
-      "id": "customer-portal-implements-encryption",
+      "id": "cwq68vq1rek",
       "type": "implementation",
-      "origin": "customer-portal",
-      "target": "data-encryption",
+      "origin": "im4cxql19dk",
+      "target": "kjdgg354bu",
       "relationship": "implements",
       "implementationType": "full",
-      "status": "implemented"
+      "status": "implemented",
+      "name": "customer-portal-implements-encryption"
     },
     {
-      "id": "infrastructure-implements-backup-recovery",
+      "id": "tzxfsmehc8d",
       "type": "implementation",
-      "origin": "cloud-infrastructure",
-      "target": "backup-recovery",
+      "origin": "8p5by5g4lg3",
+      "target": "s12aujezn8k",
       "relationship": "implements",
       "implementationType": "full",
-      "status": "implemented"
+      "status": "implemented",
+      "name": "infrastructure-implements-backup-recovery"
     },
     {
-      "id": "michael-assigned-risk-manager",
+      "id": "u57jjtzylyi",
       "type": "assignment",
-      "origin": "michael-johnson",
-      "target": "risk-manager-role",
+      "origin": "rp4or6m7n3j",
+      "target": "4d72wj4j3d9",
       "relationship": "assignedTo",
       "assignmentType": "primary",
-      "status": "active"
+      "status": "active",
+      "name": "michael-assigned-risk-manager"
     },
     {
-      "id": "risk-manager-responsible-for-data-breach",
+      "id": "qqhhu9p2cu",
       "type": "responsibility-assignment",
-      "origin": "risk-manager-role",
-      "target": "data-breach-risk",
+      "origin": "4d72wj4j3d9",
+      "target": "379bbz0vqlh",
       "relationship": "responsible-for",
       "responsibilityType": "accountable",
-      "status": "active"
+      "status": "active",
+      "name": "risk-manager-responsible-for-data-breach"
     },
     {
-      "id": "risk-manager-responsible-for-service-disruption",
+      "id": "2wbfkxmmx41",
       "type": "responsibility-assignment",
-      "origin": "risk-manager-role",
-      "target": "service-disruption-risk",
+      "origin": "4d72wj4j3d9",
+      "target": "voakyx8ki1",
       "relationship": "responsible-for",
       "responsibilityType": "accountable",
-      "status": "active"
+      "status": "active",
+      "name": "risk-manager-responsible-for-service-disruption"
     },
     {
-      "id": "risk-manager-responsible-for-regulatory-noncompliance",
+      "id": "4ltvi83baq2",
       "type": "responsibility-assignment",
-      "origin": "risk-manager-role",
-      "target": "regulatory-noncompliance-risk",
+      "origin": "4d72wj4j3d9",
+      "target": "shhfml7epom",
       "relationship": "responsible-for",
       "responsibilityType": "accountable",
-      "status": "active"
+      "status": "active",
+      "name": "risk-manager-responsible-for-regulatory-noncompliance"
     },
     {
-      "id": "michael-assigned-implement-mfa",
+      "id": "41cbhdp31w6",
       "type": "assignment",
-      "origin": "michael-johnson",
-      "target": "implement-mfa",
+      "origin": "rp4or6m7n3j",
+      "target": "ltlwi9lo2jq",
       "relationship": "assignedTo",
       "assignmentType": "primary",
-      "status": "active"
+      "status": "active",
+      "name": "michael-assigned-implement-mfa"
     },
     {
-      "id": "michael-assigned-upgrade-tls",
+      "id": "t7pipbc09k9",
       "type": "assignment",
-      "origin": "michael-johnson",
-      "target": "upgrade-tls",
+      "origin": "rp4or6m7n3j",
+      "target": "9ljdp9ztdqt",
       "relationship": "assignedTo",
       "assignmentType": "primary",
-      "status": "active"
+      "status": "active",
+      "name": "michael-assigned-upgrade-tls"
     }
   ],
   "metadata": {
@@ -507,6 +537,11 @@
     "version": "1.0.0",
     "createdAt": "2025-03-06T15:45:00Z",
     "createdBy": "GRC Schema Team",
-    "tags": ["risk management", "threat modeling", "example"]
-  }
+    "tags": [
+      "risk management",
+      "threat modeling",
+      "example"
+    ]
+  },
+  "name": "bundle-risk-management"
 }

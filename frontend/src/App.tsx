@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Box, Typography, Tabs, Tab, AppBar, Toolbar, CssBaseline, ThemeProvider, createTheme, Button } from '@mui/material';
 import DownloadIcon from '@mui/icons-material/Download';
 import DescriptionIcon from '@mui/icons-material/Description';
@@ -91,6 +91,25 @@ function App() {
   });
   const [selectedNode, setSelectedNode] = useState<GraphNode | null>(null);
   const [selectedLink, setSelectedLink] = useState<GraphLink | null>(null);
+
+  // Auto-load the risk example on first run
+  useEffect(() => {
+    const loadRiskExample = async () => {
+      try {
+        // Use window.location.pathname to get the base path dynamically
+        const basePath = window.location.pathname.endsWith('/') 
+          ? window.location.pathname 
+          : window.location.pathname + '/';
+        const exampleBundle = await fetch(`${basePath}examples/risk-management-example.json`);
+        const data = await exampleBundle.json();
+        handleBundleLoad(data);
+      } catch (error) {
+        console.error('Error loading risk example:', error);
+      }
+    };
+    
+    loadRiskExample();
+  }, []); // Empty dependency array means this runs once on component mount
 
   const handleTabChange = (_event: React.SyntheticEvent, newValue: number) => {
     setTabIndex(newValue);
@@ -229,10 +248,10 @@ function App() {
                   
                   <Box sx={{ display: 'flex' }}>
                     <Typography variant="body2" sx={{ fontWeight: 'bold', width: '80px' }}>
-                      ID:
+                      Name:
                     </Typography>
                     <Typography variant="body2" sx={{ fontFamily: 'monospace' }}>
-                      {selectedNode.id}
+                      {selectedNode.name || selectedNode.id}
                     </Typography>
                   </Box>
                 </Box>
@@ -373,12 +392,26 @@ function App() {
                   
                   <Box sx={{ display: 'flex', mb: 1 }}>
                     <Typography variant="body2" sx={{ fontWeight: 'bold', width: '80px' }}>
+                      Name:
+                    </Typography>
+                    <Typography variant="body2" sx={{ fontFamily: 'monospace' }}>
+                      {selectedLink.name || selectedLink.id}
+                    </Typography>
+                  </Box>
+                  
+                  <Box sx={{ display: 'flex', mb: 1 }}>
+                    <Typography variant="body2" sx={{ fontWeight: 'bold', width: '80px' }}>
                       From:
                     </Typography>
                     <Typography variant="body2" sx={{ fontFamily: 'monospace' }}>
-                      {selectedLink.from || selectedLink.origin || 
-                        (typeof selectedLink.source === 'string' ? selectedLink.source : 
-                          selectedLink.source?.id)}
+                      {/* Try to find the source node and use its name */}
+                      {(() => {
+                        const sourceId = selectedLink.from || selectedLink.origin || 
+                          (typeof selectedLink.source === 'string' ? selectedLink.source : 
+                            selectedLink.source?.id);
+                        const sourceNode = bundle.nodes.find(node => node.id === sourceId);
+                        return sourceNode ? (sourceNode.name || sourceId) : sourceId;
+                      })()}
                     </Typography>
                   </Box>
                   
@@ -387,9 +420,14 @@ function App() {
                       To:
                     </Typography>
                     <Typography variant="body2" sx={{ fontFamily: 'monospace' }}>
-                      {selectedLink.to || selectedLink.targetId || 
-                        (typeof selectedLink.target === 'string' ? selectedLink.target : 
-                          selectedLink.target?.id)}
+                      {/* Try to find the target node and use its name */}
+                      {(() => {
+                        const targetId = selectedLink.to || selectedLink.targetId || 
+                          (typeof selectedLink.target === 'string' ? selectedLink.target : 
+                            selectedLink.target?.id);
+                        const targetNode = bundle.nodes.find(node => node.id === targetId);
+                        return targetNode ? (targetNode.name || targetId) : targetId;
+                      })()}
                     </Typography>
                   </Box>
                 </Box>
@@ -527,7 +565,7 @@ function App() {
                           const basePath = window.location.pathname.endsWith('/') 
                             ? window.location.pathname 
                             : window.location.pathname + '/';
-                          const exampleBundle = await fetch(`${basePath}examples/simple-example.json`);
+                          const exampleBundle = await fetch(`${basePath}examples/risk-management-example.json`);
                           const data = await exampleBundle.json();
                           handleBundleLoad(data);
                         } catch (error) {
@@ -536,7 +574,7 @@ function App() {
                         }
                       }}
                     >
-                      Load Simple Example
+                      Load Risk Example
                     </Button>
                   </Box>
                 </Box>
