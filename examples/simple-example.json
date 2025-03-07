@@ -4,7 +4,7 @@
   "type": "bundle",
   "nodes": [
     {
-      "id": "system-component-1",
+      "id": "web-server",
       "type": "system-component",
       "name": "Web Server",
       "description": "Main production web server",
@@ -14,7 +14,7 @@
       "criticality": "high"
     },
     {
-      "id": "system-component-2",
+      "id": "database-server",
       "type": "system-component",
       "name": "Database Server",
       "description": "Main production database server",
@@ -24,7 +24,7 @@
       "criticality": "critical"
     },
     {
-      "id": "person-1",
+      "id": "john-doe",
       "type": "person",
       "firstName": "John",
       "lastName": "Doe",
@@ -33,7 +33,7 @@
       "title": "System Administrator"
     },
     {
-      "id": "role-1",
+      "id": "sys-admin-role",
       "type": "role",
       "name": "System Administrator",
       "description": "Responsible for managing and maintaining IT systems",
@@ -41,7 +41,7 @@
       "accessLevel": "admin"
     },
     {
-      "id": "vulnerability-1",
+      "id": "sql-injection-vuln",
       "type": "vulnerability",
       "name": "SQL Injection",
       "description": "SQL injection vulnerability in the database connection layer",
@@ -50,7 +50,7 @@
       "status": "identified"
     },
     {
-      "id": "control-1",
+      "id": "input-validation-control",
       "type": "control",
       "name": "Input Validation",
       "description": "Validate all user input to prevent SQL injection attacks",
@@ -62,37 +62,37 @@
   ],
   "links": [
     {
-      "id": "ownership-1",
+      "id": "john-owns-servers",
       "type": "ownership",
-      "from": ["person-1"],
-      "to": ["system-component-1", "system-component-2"],
+      "from": ["john-doe"],
+      "to": ["web-server", "database-server"],
       "relationship": "owns",
       "ownershipType": "primary"
     },
     {
-      "id": "assignment-1",
+      "id": "john-assigned-sysadmin",
       "type": "assignment",
-      "from": ["person-1"],
-      "to": ["role-1"],
+      "from": ["john-doe"],
+      "to": ["sys-admin-role"],
       "relationship": "assignedTo",
       "assignmentType": "primary",
       "status": "active"
     },
     {
-      "id": "mitigation-1",
+      "id": "input-validation-mitigates-sql-injection",
       "type": "mitigation",
-      "from": ["control-1"],
-      "to": ["vulnerability-1"],
+      "from": ["input-validation-control"],
+      "to": ["sql-injection-vuln"],
       "relationship": "mitigates",
       "mitigationType": "preventive",
       "effectiveness": "effective",
       "status": "implemented"
     },
     {
-      "id": "implementation-1",
+      "id": "db-implements-input-validation",
       "type": "implementation",
-      "from": ["system-component-2"],
-      "to": ["control-1"],
+      "from": ["database-server"],
+      "to": ["input-validation-control"],
       "relationship": "implements",
       "implementationType": "full",
       "status": "implemented"

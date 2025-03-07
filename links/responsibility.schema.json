@@ -17,19 +17,17 @@
         },
         "from": {
           "type": "array",
-          "description": "IDs of the source nodes (format: 'type-id')",
+          "description": "IDs of the source nodes",
           "items": {
-            "type": "string",
-            "pattern": "^(person|role)-.+"
+            "type": "string"
           },
           "minItems": 1
         },
         "to": {
           "type": "array",
-          "description": "IDs of the target nodes (format: 'type-id')",
+          "description": "IDs of the target nodes",
           "items": {
-            "type": "string",
-            "pattern": "^(control|policy|system-component|responsibility|risk)-.+"
+            "type": "string"
           },
           "minItems": 1
         },

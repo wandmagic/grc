@@ -82,7 +82,7 @@ const linkDefinition = {
     },
     from: {
       type: "array",
-      description: "IDs of the source nodes (format: 'type-id')",
+      description: "IDs of the source nodes",
       items: {
         type: "string"
       },
@@ -90,7 +90,7 @@ const linkDefinition = {
     },
     to: {
       type: "array",
-      description: "IDs of the target nodes (format: 'type-id')",
+      description: "IDs of the target nodes",
       items: {
         type: "string"
       },

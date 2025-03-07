@@ -4,7 +4,7 @@
   "type": "bundle",
   "nodes": [
     {
-      "id": "compliance-requirement-1",
+      "id": "data-encryption-req",
       "type": "compliance-requirement",
       "name": "Data Encryption at Rest",
       "description": "All sensitive data must be encrypted at rest using industry-standard encryption algorithms",
@@ -15,7 +15,7 @@
       "complianceStatus": "compliant"
     },
     {
-      "id": "compliance-requirement-2",
+      "id": "access-control-req",
       "type": "compliance-requirement",
       "name": "Access Control",
       "description": "Restrict access to system components and cardholder data to only those individuals whose job requires such access",
@@ -26,7 +26,7 @@
       "complianceStatus": "partially-compliant"
     },
     {
-      "id": "compliance-requirement-3",
+      "id": "vulnerability-mgmt-req",
       "type": "compliance-requirement",
       "name": "Vulnerability Management",
       "description": "Identify and address vulnerabilities in system components and software",
@@ -37,7 +37,7 @@
       "complianceStatus": "non-compliant"
     },
     {
-      "id": "control-1",
+      "id": "db-encryption-control",
       "type": "control",
       "name": "Database Encryption",
       "description": "Implement database-level encryption for all sensitive data",
@@ -48,7 +48,7 @@
       "effectiveness": "effective"
     },
     {
-      "id": "control-2",
+      "id": "rbac-control",
       "type": "control",
       "name": "Role-Based Access Control",
       "description": "Implement role-based access control for all systems",
@@ -59,7 +59,7 @@
       "effectiveness": "partially-effective"
     },
     {
-      "id": "control-3",
+      "id": "vuln-scanning-control",
       "type": "control",
       "name": "Vulnerability Scanning",
       "description": "Regular vulnerability scanning of all systems",
@@ -70,7 +70,7 @@
       "effectiveness": "not-assessed"
     },
     {
-      "id": "system-component-1",
+      "id": "customer-db",
       "type": "system-component",
       "name": "Customer Database",
       "description": "Database storing customer information",
@@ -79,7 +79,7 @@
       "criticality": "critical"
     },
     {
-      "id": "system-component-2",
+      "id": "identity-mgmt-system",
       "type": "system-component",
       "name": "Identity Management System",
       "description": "System for managing user identities and access",
@@ -88,7 +88,7 @@
       "criticality": "high"
     },
     {
-      "id": "policy-1",
+      "id": "data-protection-policy",
       "type": "policy",
       "name": "Data Protection Policy",
       "description": "Policy governing the protection of sensitive data",
@@ -98,7 +98,7 @@
       "effectiveDate": "2024-01-01"
     },
     {
-      "id": "policy-2",
+      "id": "access-control-policy",
       "type": "policy",
       "name": "Access Control Policy",
       "description": "Policy governing access to systems and data",
@@ -108,7 +108,7 @@
       "effectiveDate": "2023-06-15"
     },
     {
-      "id": "person-1",
+      "id": "jane-smith",
       "type": "person",
       "firstName": "Jane",
       "lastName": "Smith",
@@ -117,7 +117,7 @@
       "title": "Security Officer"
     },
     {
-      "id": "role-1",
+      "id": "security-officer-role",
       "type": "role",
       "name": "Security Officer",
       "description": "Responsible for security and compliance",
@@ -125,7 +125,7 @@
       "accessLevel": "high"
     },
     {
-      "id": "plan-of-action-item-1",
+      "id": "vuln-mgmt-program-poa",
       "type": "plan-of-action-item",
       "name": "Implement Vulnerability Management Program",
       "description": "Implement a comprehensive vulnerability management program",
@@ -137,91 +137,91 @@
   ],
   "links": [
     {
-      "id": "compliance-1",
+      "id": "db-encryption-satisfies-encryption-req",
       "type": "compliance",
-      "from": ["control-1"],
-      "to": ["compliance-requirement-1"],
+      "from": ["db-encryption-control"],
+      "to": ["data-encryption-req"],
       "relationship": "satisfies",
       "complianceType": "fully-satisfies",
       "status": "verified"
     },
     {
-      "id": "compliance-2",
+      "id": "rbac-satisfies-access-control-req",
       "type": "compliance",
-      "from": ["control-2"],
-      "to": ["compliance-requirement-2"],
+      "from": ["rbac-control"],
+      "to": ["access-control-req"],
       "relationship": "satisfies",
       "complianceType": "partially-satisfies",
       "status": "implemented"
     },
     {
-      "id": "compliance-3",
+      "id": "vuln-scanning-satisfies-vuln-mgmt-req",
       "type": "compliance",
-      "from": ["control-3"],
-      "to": ["compliance-requirement-3"],
+      "from": ["vuln-scanning-control"],
+      "to": ["vulnerability-mgmt-req"],
       "relationship": "satisfies",
       "complianceType": "fully-satisfies",
       "status": "planned"
     },
     {
-      "id": "implementation-1",
+      "id": "customer-db-implements-encryption",
       "type": "implementation",
-      "from": ["system-component-1"],
-      "to": ["control-1"],
+      "from": ["customer-db"],
+      "to": ["db-encryption-control"],
       "relationship": "implements",
       "implementationType": "full",
       "status": "implemented"
     },
     {
-      "id": "implementation-2",
+      "id": "identity-mgmt-implements-rbac",
       "type": "implementation",
-      "from": ["system-component-2"],
-      "to": ["control-2"],
+      "from": ["identity-mgmt-system"],
+      "to": ["rbac-control"],
       "relationship": "implements",
       "implementationType": "partial",
       "status": "in-progress"
     },
     {
-      "id": "implementation-3",
+      "id": "data-policy-implements-encryption",
       "type": "implementation",
-      "from": ["policy-1"],
-      "to": ["control-1"],
+      "from": ["data-protection-policy"],
+      "to": ["db-encryption-control"],
       "relationship": "implements",
       "implementationType": "full",
       "status": "implemented"
     },
     {
-      "id": "implementation-4",
+      "id": "access-policy-implements-rbac",
       "type": "implementation",
-      "from": ["policy-2"],
-      "to": ["control-2"],
+      "from": ["access-control-policy"],
+      "to": ["rbac-control"],
       "relationship": "implements",
       "implementationType": "full",
       "status": "implemented"
     },
     {
-      "id": "assignment-1",
+      "id": "jane-assigned-security-officer",
       "type": "assignment",
-      "from": ["person-1"],
-      "to": ["role-1"],
+      "from": ["jane-smith"],
+      "to": ["security-officer-role"],
       "relationship": "assignedTo",
       "assignmentType": "primary",
       "status": "active"
     },
     {
-      "id": "responsibility-1",
+      "id": "security-officer-responsible-for-controls",
       "type": "responsibility-assignment",
-      "from": ["role-1"],
-      "to": ["control-1", "control-2", "control-3"],
+      "from": ["security-officer-role"],
+      "to": ["db-encryption-control", "rbac-control", "vuln-scanning-control"],
       "relationship": "responsible-for",
       "responsibilityType": "accountable",
       "status": "active"
     },
     {
-      "id": "assignment-2",
+      "id": "jane-assigned-vuln-mgmt-poa",
       "type": "assignment",
-      "from": ["person-1"],
-      "to": ["plan-of-action-item-1"],
+      "from": ["jane-smith"],
+      "to": ["vuln-mgmt-program-poa"],
       "relationship": "assignedTo",
       "assignmentType": "primary",
       "status": "active"

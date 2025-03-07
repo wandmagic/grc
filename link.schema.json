@@ -15,7 +15,7 @@
           "properties": {
             "from": {
               "type": "array",
-              "description": "IDs of the source nodes (format: 'type-id')",
+              "description": "IDs of the source nodes",
               "items": {
                 "type": "string"
               },
@@ -23,7 +23,7 @@
             },
             "to": {
               "type": "array",
-              "description": "IDs of the target nodes (format: 'type-id')",
+              "description": "IDs of the target nodes",
               "items": {
                 "type": "string"
               },
