@@ -519,7 +519,11 @@ function App() {
                       size="small"
                       onClick={async () => {
                         try {
-                          const exampleBundle = await fetch('/examples/simple-example.json');
+                          // Use window.location.pathname to get the base path dynamically
+                          const basePath = window.location.pathname.endsWith('/') 
+                            ? window.location.pathname 
+                            : window.location.pathname + '/';
+                          const exampleBundle = await fetch(`${basePath}examples/simple-example.json`);
                           const data = await exampleBundle.json();
                           handleBundleLoad(data);
                         } catch (error) {
